@@ -1,0 +1,170 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 248 320)
+	(text "decode" (rect 5 0 33 12)(font "Arial" ))
+	(text "inst" (rect 8 288 20 300)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "Insn[31..0]" (rect 0 0 40 12)(font "Arial" ))
+		(text "Insn[31..0]" (rect 21 27 61 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "PCNextI[31..0]" (rect 0 0 57 12)(font "Arial" ))
+		(text "PCNextI[31..0]" (rect 21 43 78 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "Clear" (rect 0 0 21 12)(font "Arial" ))
+		(text "Clear" (rect 21 59 42 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "InterlockI" (rect 0 0 35 12)(font "Arial" ))
+		(text "InterlockI" (rect 21 75 56 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "Stall" (rect 0 0 15 12)(font "Arial" ))
+		(text "Stall" (rect 21 91 36 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 232 32)
+		(output)
+		(text "Funct[2..0]" (rect 0 0 42 12)(font "Arial" ))
+		(text "Funct[2..0]" (rect 169 27 211 39)(font "Arial" ))
+		(line (pt 232 32)(pt 216 32)(line_width 3))
+	)
+	(port
+		(pt 232 48)
+		(output)
+		(text "SrcRegNo1[4..0]" (rect 0 0 68 12)(font "Arial" ))
+		(text "SrcRegNo1[4..0]" (rect 143 43 211 55)(font "Arial" ))
+		(line (pt 232 48)(pt 216 48)(line_width 3))
+	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "SrcRegNo2[4..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "SrcRegNo2[4..0]" (rect 142 59 211 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 3))
+	)
+	(port
+		(pt 232 80)
+		(output)
+		(text "DestRegNo[4..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "DestRegNo[4..0]" (rect 142 75 211 87)(font "Arial" ))
+		(line (pt 232 80)(pt 216 80)(line_width 3))
+	)
+	(port
+		(pt 232 96)
+		(output)
+		(text "DestWrEn" (rect 0 0 44 12)(font "Arial" ))
+		(text "DestWrEn" (rect 167 91 211 103)(font "Arial" ))
+		(line (pt 232 96)(pt 216 96)(line_width 1))
+	)
+	(port
+		(pt 232 112)
+		(output)
+		(text "Imm[31..0]" (rect 0 0 42 12)(font "Arial" ))
+		(text "Imm[31..0]" (rect 169 107 211 119)(font "Arial" ))
+		(line (pt 232 112)(pt 216 112)(line_width 3))
+	)
+	(port
+		(pt 232 128)
+		(output)
+		(text "SelSrc2" (rect 0 0 30 12)(font "Arial" ))
+		(text "SelSrc2" (rect 181 123 211 135)(font "Arial" ))
+		(line (pt 232 128)(pt 216 128)(line_width 1))
+	)
+	(port
+		(pt 232 144)
+		(output)
+		(text "Aux" (rect 0 0 17 12)(font "Arial" ))
+		(text "Aux" (rect 194 139 211 151)(font "Arial" ))
+		(line (pt 232 144)(pt 216 144)(line_width 1))
+	)
+	(port
+		(pt 232 160)
+		(output)
+		(text "PCNextO[31..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "PCNextO[31..0]" (rect 149 155 211 167)(font "Arial" ))
+		(line (pt 232 160)(pt 216 160)(line_width 3))
+	)
+	(port
+		(pt 232 176)
+		(output)
+		(text "Jump" (rect 0 0 22 12)(font "Arial" ))
+		(text "Jump" (rect 189 171 211 183)(font "Arial" ))
+		(line (pt 232 176)(pt 216 176)(line_width 1))
+	)
+	(port
+		(pt 232 192)
+		(output)
+		(text "JumpRel" (rect 0 0 36 12)(font "Arial" ))
+		(text "JumpRel" (rect 175 187 211 199)(font "Arial" ))
+		(line (pt 232 192)(pt 216 192)(line_width 1))
+	)
+	(port
+		(pt 232 208)
+		(output)
+		(text "JumpTarget[31..0]" (rect 0 0 71 12)(font "Arial" ))
+		(text "JumpTarget[31..0]" (rect 140 203 211 215)(font "Arial" ))
+		(line (pt 232 208)(pt 216 208)(line_width 3))
+	)
+	(port
+		(pt 232 224)
+		(output)
+		(text "MemAccess" (rect 0 0 53 12)(font "Arial" ))
+		(text "MemAccess" (rect 158 219 211 231)(font "Arial" ))
+		(line (pt 232 224)(pt 216 224)(line_width 1))
+	)
+	(port
+		(pt 232 240)
+		(output)
+		(text "MemWrEn" (rect 0 0 47 12)(font "Arial" ))
+		(text "MemWrEn" (rect 164 235 211 247)(font "Arial" ))
+		(line (pt 232 240)(pt 216 240)(line_width 1))
+	)
+	(port
+		(pt 232 256)
+		(output)
+		(text "InterlockO" (rect 0 0 40 12)(font "Arial" ))
+		(text "InterlockO" (rect 171 251 211 263)(font "Arial" ))
+		(line (pt 232 256)(pt 216 256)(line_width 1))
+	)
+	(drawing
+		(rectangle (rect 16 16 216 288)(line_width 1))
+	)
+)

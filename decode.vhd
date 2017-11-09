@@ -44,13 +44,28 @@ when opcode_OP =>
 	SrcRegNo2 <= Insn(24 downto 20);
 	DestRegNo <= Insn(11 downto 7);
 	DestWrEn	 <= '1';
+	SelSrc2	 <= '1';
+	
+	Aux		 <= Insn(30);
 	
 when opcode_OP_IMM => 
 	Funct		 <= Insn(14 downto 12);
 	SrcRegNo1 <= Insn(19 downto 15);
 	DestRegNo <= Insn(11 downto 7);
 	DestWrEn	 <= '1';
+	SelSrc2	 <= '0';
 	
+	if (Insn(14 downto 12) = "101") then	
+		Aux		 <= Insn(30);
+	else
+		Aux		 <= '0';
+	end if;
+	
+	if (Insn(31 downto 31) = "0") then
+		Imm		 <= x"00000000" or Insn(31 downto 20);
+	else
+		Imm		 <= x"FFFFFFFF" or Insn(31 downto 20);
+	end if;
 when others =>
 	DestWrEn	 <= '0'; 
 end case;

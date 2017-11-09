@@ -7,7 +7,7 @@ entity RegSet is
 	Port (
 		RdRegNo1 				: in std_logic_vector(4 downto 0);
 		RdRegNo2 				: in std_logic_vector(4 downto 0);
-		WrRegNo  				: in std_logic_vector(2 downto 0);
+		WrRegNo  				: in std_logic_vector(4 downto 0);
 		WrData   				: in std_logic_vector(31 downto 0);
 		
 		RdData1   				: out std_logic_vector(31 downto 0);
@@ -23,7 +23,7 @@ architecture Behavioral of RegSet is
 TYPE TRegisters IS array (0 to 31) of std_logic_vector(31 downto 0);
 SIGNAL Registers : TRegisters;
 begin
-process(Clk, nRst)
+process(Clk, nRst, WrEn, WrData)
 begin
 
 if nRst = '0' then

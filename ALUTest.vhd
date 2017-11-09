@@ -8,7 +8,7 @@ entity ALUTest is
 		A 				: in std_logic_vector(31 downto 0);
 		B 				: in std_logic_vector(31 downto 0);
 		Funct 		: in std_logic_vector(2 downto 0);
-		Aux 			: in std_logic_vector(0 downto 0);
+		Aux 			: in std_logic;
 		PCNext 		: in std_logic_vector(31 downto 0);
 		JumpI 		: in std_logic_vector(0 downto 0);
 		JumpRel 		: in std_logic_vector(0 downto 0);
@@ -38,7 +38,13 @@ process(Funct, A, B)
 begin
 
 case Funct is
-	when "000" => X <= std_logic_vector(to_signed(to_integer(signed(A)) + to_integer(signed(B)), 32)); --funct_ADD
+	when "000" =>
+		if (Aux = '0') then
+			X <= std_logic_vector(to_signed(to_integer(signed(A)) + to_integer(signed(B)), 32)); --funct_ADD
+		else
+			X <= std_logic_vector(to_signed(to_integer(signed(A)) - to_integer(signed(B)), 32)); --funct_SUB
+		end if;	
+	
 	when "001" => X <= std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B(4 downto 0))))); --funct_SLL
 	when "010" => 																													--funct_SLT
 		if (signed(A) < signed(B)) then 
@@ -53,7 +59,12 @@ case Funct is
 			X <= x"00000000";
 		end if; 	 												
 	when "100" => X <= A xor B; 																								--funct_XOR
-	when "101" => X <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B(4 downto 0))))); --funct_SRL
+	when "101" => 	
+		if (Aux = '0') then	
+			X <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B(4 downto 0))))); --funct_SRL
+		else
+			X <= std_logic_vector(shift_right(signed(A), to_integer(unsigned(B(4 downto 0))))); --funct_SRA
+		end if;
 	when "110" => X <= A or B; 																								--funct_OR
 	when "111" => X <= A and B;																								--funct_AND
 
