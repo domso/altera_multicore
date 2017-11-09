@@ -1,0 +1,30 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.constants.all;
+
+entity Inc3Bit is
+	Port (
+		Clk 				: in std_logic;
+		nRst 				: in std_logic;
+		X  				: out std_logic_vector(9 downto 0)
+	);
+end Inc3Bit;
+
+architecture Behavioral of Inc3Bit is
+signal internalCounter : std_logic_vector(9 downto 0);
+begin
+process(Clk, nRst)
+begin
+
+if nRst = '0' then
+	internalCounter <= "0000000000";
+elsif rising_edge(Clk) then
+	internalCounter <= std_logic_vector(unsigned(internalCounter) + 1);
+end if;
+
+X <= internalCounter;
+
+end process;
+
+end Behavioral;
