@@ -5,15 +5,16 @@ use ieee.numeric_std.all;
 
 entity RegSet is
 	Port (
-		RdRegNo1 				: in std_logic_vector(4 downto 0);
-		RdRegNo2 				: in std_logic_vector(4 downto 0);
+		WrEn   					: in std_logic;
 		WrRegNo  				: in std_logic_vector(4 downto 0);
 		WrData   				: in std_logic_vector(31 downto 0);
+				
+		RdRegNo1 				: in std_logic_vector(4 downto 0);
+		RdRegNo2 				: in std_logic_vector(4 downto 0);
 		
 		RdData1   				: out std_logic_vector(31 downto 0);
 		RdData2   				: out std_logic_vector(31 downto 0);
-		
-		WrEn   					: in std_logic;
+						
 		nRst   					: in std_logic;
 		Clk   					: in std_logic
 	);

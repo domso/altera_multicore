@@ -47,10 +47,11 @@ when opcode_OP =>
 	SelSrc2	 <= '1';
 	
 	Aux		 <= Insn(30);
-	
+	Imm		 <= x"00000000";
 when opcode_OP_IMM => 
 	Funct		 <= Insn(14 downto 12);
 	SrcRegNo1 <= Insn(19 downto 15);
+	SrcRegNo2 <= "00000";
 	DestRegNo <= Insn(11 downto 7);
 	DestWrEn	 <= '1';
 	SelSrc2	 <= '0';
@@ -64,10 +65,30 @@ when opcode_OP_IMM =>
 	if (Insn(31 downto 31) = "0") then
 		Imm		 <= x"00000000" or Insn(31 downto 20);
 	else
-		Imm		 <= x"FFFFFFFF" or Insn(31 downto 20);
+		Imm		 <= x"FFFFF000" or Insn(31 downto 20);
 	end if;
+	
+when opcode_LUI =>
+	Funct		 <= "000";
+	SrcRegNo1 <= "00000";
+	SrcRegNo2 <= "00000";
+	DestRegNo <= Insn(11 downto 7);
+	DestWrEn	 <= '1';
+	SelSrc2	 <= '0';
+	Aux		 <= '0';
+	
+	Imm		 <= Insn(31 downto 12) & x"000";
 when others =>
 	DestWrEn	 <= '0'; 
+	Funct		 <= "000";
+	SrcRegNo1 <= "00000";
+	SrcRegNo2 <= "00000";
+	DestRegNo <= "00000";
+	DestWrEn	 <= '0';
+	SelSrc2	 <= '0';	
+	Aux		 <= '0';
+	Imm		 <= x"00000000";
+	
 end case;
 
 

@@ -1,0 +1,38 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity DecodeStage is
+	Port (
+		InsnI    				: in std_logic_vector(31 downto 0);
+		PCNextI    				: in std_logic_vector(31 downto 0);
+		
+		ClearI					: in std_logic;
+		InterlockI				: in std_logic;
+		StallI					: in std_logic;
+		
+		
+		InsnO    				: out std_logic_vector(31 downto 0);
+		PCNextO    				: out std_logic_vector(31 downto 0);
+		
+		ClearI					: out std_logic;
+		InterlockI				: out std_logic;
+		StallI					: out std_logic;
+		
+		nRst   					: in std_logic;
+		Clk   					: in std_logic
+	);
+end DecodeStage;
+
+architecture Behavioral of DecodeStage is
+begin
+
+process(Clk, nRst, WrEn, WrData)
+begin
+
+
+
+end process;
+
+
+end Behavioral;

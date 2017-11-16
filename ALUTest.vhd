@@ -5,29 +5,32 @@ use work.constants.all;
 
 entity ALUTest is
 	Port (
-		A 				: in std_logic_vector(31 downto 0);
 		B 				: in std_logic_vector(31 downto 0);
+		A 				: in std_logic_vector(31 downto 0);
 		Funct 		: in std_logic_vector(2 downto 0);
 		Aux 			: in std_logic;
-		PCNext 		: in std_logic_vector(31 downto 0);
-		JumpI 		: in std_logic_vector(0 downto 0);
-		JumpRel 		: in std_logic_vector(0 downto 0);
-		JumpTargetI : in std_logic_vector(31 downto 0);
-		MemAccessI 	: in std_logic_vector(0 downto 0);
-		SrcData2 	: in std_logic_vector(31 downto 0);
+	
+		DestWrEnI 	: in std_logic;
 		DestRegNoI 	: in std_logic_vector(4 downto 0);
-		DestWrEnI 	: in std_logic_vector(0 downto 0);
-		Clear 		: in std_logic_vector(0 downto 0);
-		Stall 		: in std_logic_vector(0 downto 0);
+		
+		
+		PCNext 		: in std_logic_vector(31 downto 0);
+		JumpI 		: in std_logic;
+		JumpRel 		: in std_logic;
+		JumpTargetI : in std_logic_vector(31 downto 0);
+		MemAccessI 	: in std_logic;
+		SrcData2 	: in std_logic_vector(31 downto 0);
+		Clear 		: in std_logic;
+		Stall 		: in std_logic;
 
 		X 				: out std_logic_vector(31 downto 0);
-		JumpO 		: out std_logic_vector(0 downto 0);
+		JumpO 		: out std_logic;
 		JumpTargetO : out std_logic_vector(31 downto 0);
 		DestRegNoO 	: out std_logic_vector(4 downto 0);
-		DestWrEnO 	: out std_logic_vector(0 downto 0);
-		MemAccessO 	: out std_logic_vector(0 downto 0);
+		DestWrEnO 	: out std_logic;
+		MemAccessO 	: out std_logic;
 		MemWrData	: out std_logic_vector(31 downto 0);
-		MemByteEna 	: out std_logic_vector(3 downto 0)
+		MemByteEna 	: out std_logic
 	);
 end ALUTest;
 

@@ -1,5 +1,5 @@
 Assembler report for RISCV-1
-Thu Nov  9 17:35:57 2017
+Thu Nov 16 16:29:17 2017
 Quartus Prime Version 16.0.2 Build 222 07/20/2016 SJ Standard Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Nov  9 17:35:57 2017 ;
+; Assembler Status      ; Successful - Thu Nov 16 16:29:17 2017 ;
 ; Revision Name         ; RISCV-1                               ;
 ; Top-level Entity Name ; RISCV-1                               ;
 ; Family                ; Cyclone IV E                          ;
@@ -79,8 +79,8 @@ agreement for further details.
 ; Option         ; Setting              ;
 +----------------+----------------------+
 ; Device         ; EP4CE115F29C7        ;
-; JTAG usercode  ; 0x008028EA           ;
-; Checksum       ; 0x008028EA           ;
+; JTAG usercode  ; 0x0087614C           ;
+; Checksum       ; 0x0087614C           ;
 +----------------+----------------------+
 
 
@@ -90,15 +90,15 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 16.0.2 Build 222 07/20/2016 SJ Standard Edition
-    Info: Processing started: Thu Nov  9 17:35:54 2017
+    Info: Processing started: Thu Nov 16 16:29:13 2017
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off RISCV-1 -c RISCV-1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 1112 megabytes
-    Info: Processing ended: Thu Nov  9 17:35:57 2017
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 1107 megabytes
+    Info: Processing ended: Thu Nov 16 16:29:17 2017
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:03
 
 
