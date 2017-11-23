@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity DecodeStage is
 	Port (
-		InsnI    				: in std_logic_vector(31 downto 0);
 		PCNextI    				: in std_logic_vector(31 downto 0);
+		InsnI    				: in std_logic_vector(31 downto 0);
 		
 		ClearI					: in std_logic;
 		InterlockI				: in std_logic;

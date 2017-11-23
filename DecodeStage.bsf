@@ -27,15 +27,15 @@ agreement for further details.
 	(port
 		(pt 0 32)
 		(input)
-		(text "InsnI[31..0]" (rect 0 0 42 12)(font "Arial" ))
-		(text "InsnI[31..0]" (rect 21 27 63 39)(font "Arial" ))
+		(text "PCNextI[31..0]" (rect 0 0 57 12)(font "Arial" ))
+		(text "PCNextI[31..0]" (rect 21 27 78 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32)(line_width 3))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "PCNextI[31..0]" (rect 0 0 57 12)(font "Arial" ))
-		(text "PCNextI[31..0]" (rect 21 43 78 55)(font "Arial" ))
+		(text "InsnI[31..0]" (rect 0 0 42 12)(font "Arial" ))
+		(text "InsnI[31..0]" (rect 21 43 63 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port

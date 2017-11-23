@@ -1,0 +1,66 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.constants.all;
+
+
+entity Fetch is
+	Port (
+		PCI			: in std_logic_vector(31 downto 0);
+		PCO			: out std_logic_vector(31 downto 0);	
+		
+		nRst   		: in std_logic;
+		Clk   		: in std_logic
+	);
+end Fetch;
+
+architecture Behavioral of Fetch is
+
+begin
+process(Clk, nRst)
+begin
+
+if nRst = '0' then
+	PCO	<= x"FFFFFFFC";
+		
+elsif rising_edge(Clk) then
+	PCO	<= PCI;
+end if;
+
+
+end process;
+
+end Behavioral;
+
+
+
+Name
+PCOld
+Jump
+JumpTarget
+InterlockI
+Stall
+PCNext
+ImemAddr
+Richtung Bitbreite
+in
+in
+in
+in
+in
+out
+out 32
+1
+32
+1
+1
+32
+10
+verbinden mit
+FetchStage.PCO
+ALU.JumpO
+ALU.JumpTargetO
+auf späterem Übungsblatt
+auf späterem Übungsblatt
+FetchStage.PCI
+imem.address
