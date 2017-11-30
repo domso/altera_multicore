@@ -82,8 +82,15 @@ elsif rising_edge(Clk) then
 	JumpO        <= JumpI;
 	JumpRelO     <= JumpRelI;
 	JumpTargetO  <= JumpTargetI;
-	MemAccessO   <= MemAccessI;
-	MemWrEnO     <= MemWrEnI;
+	
+	if (ClearI = '0') then
+		MemAccessO   <= MemAccessI;
+		MemWrEnO     <= MemWrEnI;
+	else
+		MemAccessO   <= '0';
+		MemWrEnO     <= '0';	
+	end if;
+		
 	ClearO       <= ClearI;
 	StallO       <= StallI;
 end if;

@@ -29,7 +29,7 @@ entity ALUTest is
 		DestWrEnO 	: out std_logic;
 		MemAccessO 	: out std_logic;
 		MemWrData	: out std_logic_vector(31 downto 0);
-		MemByteEna 	: out std_logic;
+		MemByteEna 	: out std_logic_vector(3 downto 0);
 		JumpO 		: out std_logic
 	);
 end ALUTest;
@@ -40,6 +40,7 @@ process(Funct, A, B, JumpI, Clear)
 variable Result : std_logic_vector(31 downto 0) := x"00000000";
 variable Cond   : boolean := true;
 begin
+	MemByteEna	<= "1111";
 	
 	if (clear = '1') then	
 		X 				<= x"00000000";			
@@ -120,6 +121,24 @@ begin
 	end if;
 end process;
 
+process(MemAccessI, Clear)
+begin
+	if (Clear = '1') then
+		MemAccessO <= '0';
+	else
+		MemAccessO <= MemAccessI;
+	end if;
+end process;
+
+process(SrcData2, Clear)
+begin
+	MemWrData <= SrcData2;
+	if (Clear = '1') then
+		MemWrData <= x"00000000";
+	else
+		MemWrData <= SrcData2;
+	end if;
+end process;
 
 process(DestRegNoI, Clear)
 begin

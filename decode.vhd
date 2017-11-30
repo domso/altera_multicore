@@ -35,7 +35,7 @@ architecture Behavioral of decode is
 begin
 process(Insn, PCNextI, Clear, InterlockI, Stall)
 begin
-	if (Clear = '1') then
+	if (Clear = '1' or InterlockI = '1') then
 		DestWrEn	 	 <= '0'; 
 		Funct		 	 <= "000";
 		SrcRegNo1 	 <= "00000";
@@ -49,7 +49,11 @@ begin
 		Jump		 	 <= '0';
 		JumpRel	 	 <= '0';
 		JumpTarget	 <= x"00000000";
-		PCNextO <= PCNextI;
+		PCNextO		 <= PCNextI;	
+			
+		InterlockO	 <= '0';
+		MemAccess	 <= '0';
+		MemWrEn		 <= '0';
 	else	
 		case Insn(6 downto 0) is
 		when opcode_OP => 
@@ -66,7 +70,11 @@ begin
 			Jump		 	 <= '0';
 			JumpRel	 	 <= '0';
 			JumpTarget	 <= x"00000000";
-			PCNextO <= PCNextI;
+			PCNextO		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -90,7 +98,11 @@ begin
 			Jump		 	 <= '0';
 			JumpRel	 	 <= '0';
 			JumpTarget	 <= x"00000000";
-			PCNextO <= PCNextI;
+			PCNextO		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -105,7 +117,11 @@ begin
 			Jump		 	 <= '0';
 			JumpRel	 	 <= '0';
 			JumpTarget	 <= x"00000000";
-			PCNextO <= PCNextI;
+			PCNextO		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -124,7 +140,11 @@ begin
 			Jump		 	 <= '1';
 			JumpRel	 	 <= '0';
 			JumpTarget	 <= std_logic_vector(signed(PCNextI) + to_signed(-4, 32) + signed(Insn(31) & Insn(19 downto 12) & Insn(20) & Insn(30 downto 21) &"0"));
-			PCNextO <= PCNextI;
+			PCNextO 		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 			
 		when opcode_JALR =>
 			Funct		 	 <= "000";
@@ -144,7 +164,11 @@ begin
 			Jump		 	 <= '1';
 			JumpRel	 	 <= '1';
 			JumpTarget	 <= std_logic_vector(signed(PCNextI) + to_signed(-4, 32) + signed(Insn(31) & Insn(19 downto 12) & Insn(20) & Insn(30 downto 21) &"0"));
-			PCNextO <= PCNextI;
+			PCNextO		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 				
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
@@ -160,7 +184,11 @@ begin
 			Jump		 	 <= '0';
 			JumpRel	 	 <= '1';
 			JumpTarget 	 <= std_logic_vector(signed(PCNextI) + to_signed(-4, 32) + signed(Insn(31) & Insn(7) & Insn(30 downto 25) & Insn(11 downto 8) &"0"));
-			PCNextO 		 <= PCNextI;
+			PCNextO 		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 				
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
@@ -170,14 +198,65 @@ begin
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			Aux		 	 <= '0';			
-			Imm		 	 <= Insn(31 downto 12) & x"000";
+			Imm		 	 <= std_logic_vector(signed(PCNextI) + to_signed(-4, 32) + signed(Insn(31 downto 12) & x"000"));
 			
-			Jump		 	 <= '1';
+			Jump		 	 <= '0';
 			JumpRel	 	 <= '0';
-			JumpTarget	 <= std_logic_vector(signed(PCNextI) + signed(Insn(31 downto 12) & x"000"));
-			PCNextO 		 <= std_logic_vector(signed(PCNextI) + to_signed(-4, 32) + signed(Insn(31 downto 12) & x"000"));
+			JumpTarget	 <= x"00000000"; 
+			PCNextO 		 <= PCNextI;
 			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 			
+		when opcode_load =>
+			Funct		 	 <= "000";
+			SrcRegNo1 	 <= Insn(19 downto 15);
+			SrcRegNo2 	 <= "00000";
+			DestRegNo 	 <= Insn(11 downto 7);
+			DestWrEn	 	 <= '1';
+			SelSrc2	 	 <= '0';
+			
+			Aux			 <= '0';
+			
+			if (Insn(31 downto 31) = "0") then
+				Imm		 <= x"00000000" or Insn(31 downto 20);
+			else
+				Imm		 <= x"FFFFF000" or Insn(31 downto 20);
+			end if;
+			
+			Jump		 	 <= '0';
+			JumpRel	 	 <= '0';
+			JumpTarget	 <= x"00000000";
+			PCNextO 		 <= PCNextI;		
+			
+			InterlockO	 <= '1';
+			MemAccess	 <= '1';
+			MemWrEn		 <= '0';
+		when opcode_store =>
+			Funct		 	 <= "000";
+			SrcRegNo1 	 <= Insn(19 downto 15);
+			SrcRegNo2 	 <= Insn(24 downto 20);
+			DestRegNo 	 <= "00000";
+			DestWrEn	 	 <= '0';
+			SelSrc2	 	 <= '0';
+			
+			Aux			 <= '0';
+			
+			if (Insn(31 downto 31) = "0") then
+				Imm		 <= x"00000" & Insn(31 downto 25) & Insn(11 downto 7);
+			else
+				Imm		 <= x"FFFFF" & Insn(31 downto 25) & Insn(11 downto 7);
+			end if;
+			
+			Jump		 	 <= '0';
+			JumpRel	 	 <= '0';
+			JumpTarget	 <= x"00000000";
+			PCNextO 		 <= PCNextI;		
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '1';
+			MemWrEn		 <= '1';
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
@@ -192,7 +271,11 @@ begin
 			Jump		 	 <= '0';
 			JumpRel	 	 <= '0';
 			JumpTarget	 <= x"00000000";
-			PCNextO <= PCNextI;
+			PCNextO 		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
 		end case;
 	end if;
 end process;

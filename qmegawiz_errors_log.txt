@@ -1,0 +1,25 @@
+
+
+/student/home/walterdo/hardware_entwurf/riskv/Memory.vhd
+
+Nov 30 10AM:30:33>: The following design file, which has identical name but a different extension 
+from the specified variation file, already exists in the working directory:
+
+Memory.v
+
+This may create a conflict of design files and/or lead to undesirable side
+effects.
+
+Is it OK to continue file generation?
+
+/student/home/walterdo/hardware_entwurf/riskv/Memory.vhd
+
+Nov 30 10AM:32:39>: The following design file, which has identical name but a different extension 
+from the specified variation file, already exists in the working directory:
+
+Memory.v
+
+This may create a conflict of design files and/or lead to undesirable side
+effects.
+
+Is it OK to continue file generation?

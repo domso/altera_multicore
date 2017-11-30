@@ -167,9 +167,9 @@ agreement for further details.
 	(port
 		(pt 256 128)
 		(output)
-		(text "MemByteEna" (rect 0 0 56 12)(font "Arial" ))
-		(text "MemByteEna" (rect 179 123 235 135)(font "Arial" ))
-		(line (pt 256 128)(pt 240 128)(line_width 1))
+		(text "MemByteEna[3..0]" (rect 0 0 76 12)(font "Arial" ))
+		(text "MemByteEna[3..0]" (rect 159 123 235 135)(font "Arial" ))
+		(line (pt 256 128)(pt 240 128)(line_width 3))
 	)
 	(port
 		(pt 256 144)

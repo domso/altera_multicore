@@ -23,12 +23,17 @@ begin
 process(PCOld, Jump, JumpTarget, InterlockI, Stall)
 begin
 
-if (Jump = '1') then
-	PCNext 	<= JumpTarget;	
-	ImemAddr <= JumpTarget(11 downto 2);
+if (InterlockI = '0') then
+	if (Jump = '1') then
+		PCNext 	<= JumpTarget;	
+		ImemAddr <= JumpTarget(11 downto 2);
+	else
+		PCNext 	<= std_logic_vector(to_signed(to_integer(signed(PCOld)) + 4, 32));
+		ImemAddr <= std_logic_vector(to_signed(to_integer(signed(PCOld)) + 4, 32))(11 downto 2);
+	end if;
 else
-	PCNext 	<= std_logic_vector(to_signed(to_integer(signed(PCOld)) + 4, 32));
-	ImemAddr <= std_logic_vector(to_signed(to_integer(signed(PCOld)) + 4, 32))(11 downto 2);
+	PCNext		<= PCOld;
+	ImemAddr 	<= PCOld(11 downto 2);
 end if;
 
 end process;
