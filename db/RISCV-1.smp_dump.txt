@@ -1,0 +1,7 @@
+
+State Machine - |RISCV-1|SRAMController:inst10|aktuellerZustand
+Name aktuellerZustand.writeHighByte aktuellerZustand.readHighByte aktuellerZustand.readLowByte aktuellerZustand.waitMemInstr 
+aktuellerZustand.waitMemInstr 0 0 0 0 
+aktuellerZustand.readLowByte 0 0 1 1 
+aktuellerZustand.readHighByte 0 1 0 1 
+aktuellerZustand.writeHighByte 1 0 0 1 

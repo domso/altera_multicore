@@ -16,6 +16,8 @@ entity MemStage is
 		MemAccessO		: out std_logic;
 		FunctO			: out std_logic_vector(2 downto 0);
 				
+				
+		StallI			: in std_logic;
 		nRst   			: in std_logic;
 		Clk   			: in std_logic
 	);
@@ -24,7 +26,7 @@ end MemStage;
 architecture Behavioral of MemStage is
 begin
 
-process(nRst, Clk)
+process(nRst, Clk, StallI)
 begin
 
 if nRst = '0' then
@@ -34,11 +36,13 @@ if nRst = '0' then
 	MemAccessO		<= '0';
 	FunctO			<= "000";
 elsif rising_edge(Clk) then
-	DestWrEnO		<= DestWrEnI;
-	DestRegNoO		<= DestRegNoI;
-	DestDataO		<= DestDataI;
-	MemAccessO		<= MemAccessI;
-	FunctO			<= FunctI;
+	if StallI = '0' then
+		DestWrEnO		<= DestWrEnI;
+		DestRegNoO		<= DestRegNoI;
+		DestDataO		<= DestDataI;
+		MemAccessO		<= MemAccessI;
+		FunctO			<= FunctI;
+	end if;
 end if;
 
 end process;

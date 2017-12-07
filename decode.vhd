@@ -210,7 +210,7 @@ begin
 			MemWrEn		 <= '0';
 			
 		when opcode_load =>
-			Funct		 	 <= "000";
+			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
 			SrcRegNo2 	 <= "00000";
 			DestRegNo 	 <= Insn(11 downto 7);
@@ -234,7 +234,7 @@ begin
 			MemAccess	 <= '1';
 			MemWrEn		 <= '0';
 		when opcode_store =>
-			Funct		 	 <= "000";
+			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
 			SrcRegNo2 	 <= Insn(24 downto 20);
 			DestRegNo 	 <= "00000";

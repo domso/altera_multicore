@@ -49,7 +49,7 @@ end ExecuteStage;
 architecture Behavioral of ExecuteStage is
 begin
 
-process(nRst, Clk)
+process(nRst, Clk, StallI)
 begin
 
 if nRst = '0' then
@@ -70,29 +70,31 @@ if nRst = '0' then
 	ClearO       <= '0';
 	StallO       <= '0';
 elsif rising_edge(Clk) then
-	FunctO       <= FunctI;
-	SrcData1O    <= SrcData1I;
-	SrcData2O    <= SrcData2I;
-	ImmO         <= ImmI;
-	SelSrc2O     <= SelSrc2I;
-	AuxO         <= AuxI;
-	DestWrEnO    <= DestWrEnI;
-	DestRegNoO   <= DestRegNoI;
-	PCNextO      <= PCNextI;
-	JumpO        <= JumpI;
-	JumpRelO     <= JumpRelI;
-	JumpTargetO  <= JumpTargetI;
-	
-	if (ClearI = '0') then
-		MemAccessO   <= MemAccessI;
-		MemWrEnO     <= MemWrEnI;
-	else
-		MemAccessO   <= '0';
-		MemWrEnO     <= '0';	
-	end if;
+	if StallI = '0' then
+		FunctO       <= FunctI;
+		SrcData1O    <= SrcData1I;
+		SrcData2O    <= SrcData2I;
+		ImmO         <= ImmI;
+		SelSrc2O     <= SelSrc2I;
+		AuxO         <= AuxI;
+		DestWrEnO    <= DestWrEnI;
+		DestRegNoO   <= DestRegNoI;
+		PCNextO      <= PCNextI;
+		JumpO        <= JumpI;
+		JumpRelO     <= JumpRelI;
+		JumpTargetO  <= JumpTargetI;
 		
-	ClearO       <= ClearI;
-	StallO       <= StallI;
+		if (ClearI = '0') then
+			MemAccessO   <= MemAccessI;
+			MemWrEnO     <= MemWrEnI;
+		else
+			MemAccessO   <= '0';
+			MemWrEnO     <= '0';	
+		end if;
+			
+		ClearO       <= ClearI;
+		StallO       <= StallI;
+	end if;
 end if;
 
 end process;

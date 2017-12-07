@@ -7,13 +7,13 @@ use work.constants.all;
 entity Fetch is
 	Port (
 		JumpTarget	: in std_logic_vector(31 downto 0);
-		InterlockI	: in std_logic;
-		Stall			: in std_logic;
+		PCOld			: in std_logic_vector(31 downto 0);
 		
 		PCNext		: out std_logic_vector(31 downto 0);
 		ImemAddr		: out std_logic_vector(9 downto 0);
-		PCOld			: in std_logic_vector(31 downto 0);
-		Jump			: in std_logic
+		Jump			: in std_logic;
+		Stall			: in std_logic;
+		InterlockI	: in std_logic
 	);
 end Fetch;
 
@@ -23,7 +23,7 @@ begin
 process(PCOld, Jump, JumpTarget, InterlockI, Stall)
 begin
 
-if (InterlockI = '0') then
+if (InterlockI = '0' and Stall = '0') then
 	if (Jump = '1') then
 		PCNext 	<= JumpTarget;	
 		ImemAddr <= JumpTarget(11 downto 2);

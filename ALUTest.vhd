@@ -36,16 +36,19 @@ end ALUTest;
 
 architecture Behavioral of ALUTest is
 begin
-process(Funct, A, B, JumpI, Clear)
+process(Funct, A, B, JumpI, Clear, SrcData2)
 variable Result : std_logic_vector(31 downto 0) := x"00000000";
 variable Cond   : boolean := true;
 begin
-	MemByteEna	<= "1111";
 	
 	if (clear = '1') then	
 		X 				<= x"00000000";			
 		JumpTargetO <= x"00000000";
 		JumpO 		<= '0';
+		MemByteEna	<= "0000";
+		MemWrData   <= x"00000000";
+		Result		:= x"00000000";
+		Cond			:= true;
 	else
 		if (JumpI = '0' and JumpRel = '1') then
 			case Funct is
@@ -57,6 +60,27 @@ begin
 			  when funct_BGEU     =>	Cond := unsigned(A) >= unsigned(B);
 			  when others			 =>   Cond := false;
 			end case;
+			
+			MemByteEna	<= "0000";
+			MemWrData <= x"00000000";
+			Result		 := x"00000000";	
+		elsif (MemAccessI = '1') then
+			Result := std_logic_vector(to_signed(to_integer(signed(A)) + to_integer(signed(B)), 32)); --funct_ADD
+			case Funct(1 downto 0) is			
+				when "00" => 
+					MemByteEna  <= std_logic_vector(shift_left("0001", to_integer(unsigned(Result(1 downto 0)))));
+					MemWrData 	<= SrcData2(7 downto 0) & SrcData2(7 downto 0) & SrcData2(7 downto 0) & SrcData2(7 downto 0);
+				when "01" =>
+					MemByteEna  <= std_logic_vector(shift_left("0011", to_integer(unsigned(Result(1 downto 0)))));
+					MemWrData 	<= SrcData2(15 downto 0) & SrcData2(15 downto 0);
+				when "10" =>	
+					MemByteEna	<= "1111";		
+					MemWrData 	<= SrcData2;
+				when others =>
+					MemByteEna  <= "0000";
+					MemWrData	<= SrcData2;
+			end case;			
+			Cond			:= true;	
 		else
 			case Funct is
 				when funct_ADD =>
@@ -64,8 +88,7 @@ begin
 						Result := std_logic_vector(to_signed(to_integer(signed(A)) + to_integer(signed(B)), 32)); --funct_ADD
 					else
 						Result := std_logic_vector(to_signed(to_integer(signed(A)) - to_integer(signed(B)), 32)); --funct_SUB
-					end if;	
-				
+					end if;					
 				when funct_SLL => Result := std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B(4 downto 0))))); --funct_SLL
 				when funct_SLT => 																													--funct_SLT
 					if (signed(A) < signed(B)) then 
@@ -90,7 +113,11 @@ begin
 				when funct_AND => Result := A and B;																								--funct_AND
 
 				when others => Result := x"00000000";
-			end case;
+			end case;			
+			
+			MemByteEna	<= "0000";
+			MemWrData <= SrcData2;
+			Cond			:= true;
 		end if;
 		
 		if (JumpI = '0') then		
@@ -127,16 +154,6 @@ begin
 		MemAccessO <= '0';
 	else
 		MemAccessO <= MemAccessI;
-	end if;
-end process;
-
-process(SrcData2, Clear)
-begin
-	MemWrData <= SrcData2;
-	if (Clear = '1') then
-		MemWrData <= x"00000000";
-	else
-		MemWrData <= SrcData2;
 	end if;
 end process;
 

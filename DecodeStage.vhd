@@ -8,7 +8,6 @@ entity DecodeStage is
 		InsnI    				: in std_logic_vector(31 downto 0);
 		
 		ClearI					: in std_logic;
-		InterlockI				: in std_logic;
 		StallI					: in std_logic;
 		
 		
@@ -20,14 +19,15 @@ entity DecodeStage is
 		StallO					: out std_logic;
 		
 		nRst   					: in std_logic;
-		Clk   					: in std_logic
+		Clk   					: in std_logic;
+		InterlockI				: in std_logic
 	);
 end DecodeStage;
 
 architecture Behavioral of DecodeStage is
 begin
 
-process(nRst, Clk)
+process(nRst, Clk, StallI)
 begin
 
 if nRst = '0' then
@@ -37,11 +37,13 @@ if nRst = '0' then
 	InterlockO <= '0';
 	StallO     <= '0';	
 elsif rising_edge(Clk) then
-	InsnO 	  <= InsnI;
-	PCNextO    <= PCNextI;
-	ClearO     <= ClearI;
-	InterlockO <= InterlockI;
-	StallO     <= StallI;
+	if StallI = '0' then
+		InsnO 	  <= InsnI;
+		PCNextO    <= PCNextI;
+		ClearO     <= ClearI;
+		InterlockO <= InterlockI;
+		StallO     <= StallI;
+	end if;
 end if;
 
 end process;
