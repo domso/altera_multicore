@@ -29,7 +29,7 @@
  --                 of its bank.
  --                  Bank 1:       2.5V
  --                  Bank 2:       3.3V
- --                  Bank 3:       2.5V
+ --                  Bank 3:       3.3V
  --                  Bank 4:       2.5V
  --                  Bank 5:       2.5V
  --                  Bank 6:       2.5V
@@ -98,14 +98,14 @@ VCCIO7                       : A27       : power  :                   : 2.5V    
 VCCIO2                       : AA1       : power  :                   : 3.3V    : 2         :                
 GND                          : AA2       : gnd    :                   :         :           :                
 RESERVED_INPUT               : AA3       :        :                   :         : 2         :                
-RESERVED_INPUT               : AA4       :        :                   :         : 2         :                
+SRAM_ADDR[14]                : AA4       : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : AA5       :        :                   :         : 2         :                
 RESERVED_INPUT               : AA6       :        :                   :         : 2         :                
 RESERVED_INPUT               : AA7       :        :                   :         : 2         :                
 RESERVED_INPUT               : AA8       :        :                   :         : 3         :                
 GNDA1                        : AA9       : gnd    :                   :         :           :                
 RESERVED_INPUT               : AA10      :        :                   :         : 3         :                
-VCCIO3                       : AA11      : power  :                   : 2.5V    : 3         :                
+VCCIO3                       : AA11      : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : AA12      :        :                   :         : 3         :                
 RESERVED_INPUT               : AA13      :        :                   :         : 3         :                
 RESERVED_INPUT               : AA14      :        :                   :         : 3         :                
@@ -126,14 +126,14 @@ VCCIO5                       : AA28      : power  :                   : 2.5V    
 RESERVED_INPUT               : AB1       :        :                   :         : 2         :                
 RESERVED_INPUT               : AB2       :        :                   :         : 2         :                
 RESERVED_INPUT               : AB3       :        :                   :         : 2         :                
-RESERVED_INPUT               : AB4       :        :                   :         : 2         :                
-RESERVED_INPUT               : AB5       :        :                   :         : 2         :                
-RESERVED_INPUT               : AB6       :        :                   :         : 2         :                
-RESERVED_INPUT               : AB7       :        :                   :         : 3         :                
-RESERVED_INPUT               : AB8       :        :                   :         : 3         :                
-RESERVED_INPUT               : AB9       :        :                   :         : 3         :                
+SRAM_ADDR[12]                : AB4       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[6]                 : AB5       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[4]                 : AB6       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[0]                 : AB7       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_ADDR[18]                : AB8       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_ADDR[17]                : AB9       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AB10      :        :                   :         : 3         :                
-RESERVED_INPUT               : AB11      :        :                   :         : 3         :                
+SRAM_ADDR[15]                : AB11      : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AB12      :        :                   :         : 3         :                
 RESERVED_INPUT               : AB13      :        :                   :         : 3         :                
 RESERVED_INPUT               : AB14      :        :                   :         : 3         :                
@@ -153,15 +153,15 @@ RESERVED_INPUT               : AB27      :        :                   :         
 RESERVED_INPUT               : AB28      :        :                   :         : 5         :                
 RESERVED_INPUT               : AC1       :        :                   :         : 2         :                
 RESERVED_INPUT               : AC2       :        :                   :         : 2         :                
-RESERVED_INPUT               : AC3       :        :                   :         : 2         :                
-RESERVED_INPUT               : AC4       :        :                   :         : 2         :                
-RESERVED_INPUT               : AC5       :        :                   :         : 2         :                
+SRAM_ADDR[13]                : AC3       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_UB_N                    : AC4       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[7]                 : AC5       : output : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : AC6       : gnd    :                   :         :           :                
-RESERVED_INPUT               : AC7       :        :                   :         : 3         :                
+SRAM_ADDR[3]                 : AC7       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AC8       :        :                   :         : 3         :                
 GND                          : AC9       : gnd    :                   :         :           :                
 RESERVED_INPUT               : AC10      :        :                   :         : 3         :                
-RESERVED_INPUT               : AC11      :        :                   :         : 3         :                
+SRAM_ADDR[16]                : AC11      : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AC12      :        :                   :         : 3         :                
 GND                          : AC13      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AC14      :        :                   :         : 3         :                
@@ -179,19 +179,19 @@ RESERVED_INPUT               : AC25      :        :                   :         
 RESERVED_INPUT               : AC26      :        :                   :         : 5         :                
 RESERVED_INPUT               : AC27      :        :                   :         : 5         :                
 RESERVED_INPUT               : AC28      :        :                   :         : 5         :                
-RESERVED_INPUT               : AD1       :        :                   :         : 2         :                
-RESERVED_INPUT               : AD2       :        :                   :         : 2         :                
-RESERVED_INPUT               : AD3       :        :                   :         : 2         :                
-RESERVED_INPUT               : AD4       :        :                   :         : 3         :                
-RESERVED_INPUT               : AD5       :        :                   :         : 3         :                
-VCCIO3                       : AD6       : power  :                   : 2.5V    : 3         :                
-RESERVED_INPUT               : AD7       :        :                   :         : 3         :                
+SRAM_DQ[8]                   : AD1       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_DQ[9]                   : AD2       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[11]                : AD3       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_LB_N                    : AD4       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_OE_N                    : AD5       : output : 3.3-V LVTTL       :         : 3         : Y              
+VCCIO3                       : AD6       : power  :                   : 3.3V    : 3         :                
+SRAM_ADDR[1]                 : AD7       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AD8       :        :                   :         : 3         :                
-VCCIO3                       : AD9       : power  :                   : 2.5V    : 3         :                
+VCCIO3                       : AD9       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : AD10      :        :                   :         : 3         :                
 RESERVED_INPUT               : AD11      :        :                   :         : 3         :                
 RESERVED_INPUT               : AD12      :        :                   :         : 3         :                
-VCCIO3                       : AD13      : power  :                   : 2.5V    : 3         :                
+VCCIO3                       : AD13      : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : AD14      :        :                   :         : 3         :                
 RESERVED_INPUT               : AD15      :        :                   :         : 4         :                
 VCCIO4                       : AD16      : power  :                   : 2.5V    : 4         :                
@@ -207,14 +207,14 @@ RESERVED_INPUT               : AD25      :        :                   :         
 RESERVED_INPUT               : AD26      :        :                   :         : 5         :                
 RESERVED_INPUT               : AD27      :        :                   :         : 5         :                
 RESERVED_INPUT               : AD28      :        :                   :         : 5         :                
-RESERVED_INPUT               : AE1       :        :                   :         : 2         :                
-RESERVED_INPUT               : AE2       :        :                   :         : 2         :                
-RESERVED_INPUT               : AE3       :        :                   :         : 2         :                
-RESERVED_INPUT               : AE4       :        :                   :         : 3         :                
+SRAM_DQ[11]                  : AE1       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_DQ[10]                  : AE2       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_DQ[12]                  : AE3       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_DQ[13]                  : AE4       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AE5       :        :                   :         : 3         :                
-RESERVED_INPUT               : AE6       :        :                   :         : 3         :                
-RESERVED_INPUT               : AE7       :        :                   :         : 3         :                
-RESERVED_INPUT               : AE8       :        :                   :         : 3         :                
+SRAM_ADDR[5]                 : AE6       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_ADDR[2]                 : AE7       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_WE_N                    : AE8       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AE9       :        :                   :         : 3         :                
 RESERVED_INPUT               : AE10      :        :                   :         : 3         :                
 RESERVED_INPUT               : AE11      :        :                   :         : 3         :                
@@ -236,13 +236,13 @@ RESERVED_INPUT               : AE26      :        :                   :         
 RESERVED_INPUT               : AE27      :        :                   :         : 5         :                
 RESERVED_INPUT               : AE28      :        :                   :         : 5         :                
 GND                          : AF1       : gnd    :                   :         :           :                
-RESERVED_INPUT               : AF2       :        :                   :         : 2         :                
-RESERVED_INPUT               : AF3       :        :                   :         : 3         :                
-RESERVED_INPUT               : AF4       :        :                   :         : 3         :                
-RESERVED_INPUT               : AF5       :        :                   :         : 3         :                
-RESERVED_INPUT               : AF6       :        :                   :         : 3         :                
-RESERVED_INPUT               : AF7       :        :                   :         : 3         :                
-RESERVED_INPUT               : AF8       :        :                   :         : 3         :                
+SRAM_ADDR[10]                : AF2       : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_DQ[14]                  : AF3       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_DQ[1]                   : AF4       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_ADDR[8]                 : AF5       : output : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_DQ[4]                   : AF6       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_DQ[7]                   : AF7       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_CE_N                    : AF8       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AF9       :        :                   :         : 3         :                
 RESERVED_INPUT               : AF10      :        :                   :         : 3         :                
 RESERVED_INPUT               : AF11      :        :                   :         : 3         :                
@@ -265,10 +265,10 @@ RESERVED_INPUT               : AF27      :        :                   :         
 GND                          : AF28      : gnd    :                   :         :           :                
 VCCIO2                       : AG1       : power  :                   : 3.3V    : 2         :                
 GND                          : AG2       : gnd    :                   :         :           :                
-RESERVED_INPUT               : AG3       :        :                   :         : 3         :                
-RESERVED_INPUT               : AG4       :        :                   :         : 3         :                
+SRAM_DQ[15]                  : AG3       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_DQ[2]                   : AG4       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : AG5       : gnd    :                   :         :           :                
-RESERVED_INPUT               : AG6       :        :                   :         : 3         :                
+SRAM_DQ[5]                   : AG6       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AG7       :        :                   :         : 3         :                
 RESERVED_INPUT               : AG8       :        :                   :         : 3         :                
 GND                          : AG9       : gnd    :                   :         :           :                
@@ -291,18 +291,18 @@ RESERVED_INPUT               : AG25      :        :                   :         
 RESERVED_INPUT               : AG26      :        :                   :         : 4         :                
 GND                          : AG27      : gnd    :                   :         :           :                
 VCCIO5                       : AG28      : power  :                   : 2.5V    : 5         :                
-VCCIO3                       : AH2       : power  :                   : 2.5V    : 3         :                
-RESERVED_INPUT               : AH3       :        :                   :         : 3         :                
-RESERVED_INPUT               : AH4       :        :                   :         : 3         :                
-VCCIO3                       : AH5       : power  :                   : 2.5V    : 3         :                
-RESERVED_INPUT               : AH6       :        :                   :         : 3         :                
+VCCIO3                       : AH2       : power  :                   : 3.3V    : 3         :                
+SRAM_DQ[0]                   : AH3       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+SRAM_DQ[3]                   : AH4       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
+VCCIO3                       : AH5       : power  :                   : 3.3V    : 3         :                
+SRAM_DQ[6]                   : AH6       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : AH7       :        :                   :         : 3         :                
 RESERVED_INPUT               : AH8       :        :                   :         : 3         :                
-VCCIO3                       : AH9       : power  :                   : 2.5V    : 3         :                
+VCCIO3                       : AH9       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : AH10      :        :                   :         : 3         :                
 RESERVED_INPUT               : AH11      :        :                   :         : 3         :                
 RESERVED_INPUT               : AH12      :        :                   :         : 3         :                
-VCCIO3                       : AH13      : power  :                   : 2.5V    : 3         :                
+VCCIO3                       : AH13      : power  :                   : 3.3V    : 3         :                
 GND+                         : AH14      :        :                   :         : 3         :                
 GND+                         : AH15      :        :                   :         : 4         :                
 VCCIO4                       : AH16      : power  :                   : 2.5V    : 4         :                
@@ -715,8 +715,8 @@ RESERVED_INPUT               : T3        :        :                   :         
 RESERVED_INPUT               : T4        :        :                   :         : 2         :                
 VCCIO2                       : T5        : power  :                   : 3.3V    : 2         :                
 GND                          : T6        : gnd    :                   :         :           :                
-RESERVED_INPUT               : T7        :        :                   :         : 2         :                
-RESERVED_INPUT               : T8        :        :                   :         : 2         :                
+SRAM_ADDR[9]                 : T7        : output : 3.3-V LVTTL       :         : 2         : Y              
+SRAM_ADDR[19]                : T8        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : T9        : power  :                   : 1.2V    :           :                
 GND                          : T10       : gnd    :                   :         :           :                
 VCCINT                       : T11       : power  :                   : 1.2V    :           :                

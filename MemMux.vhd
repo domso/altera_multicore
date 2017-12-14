@@ -5,10 +5,11 @@ use ieee.numeric_std.all;
 
 entity MemMux is
 	Port (
+		RomDataIn 	: in std_logic_vector(31 downto 0);
 		ALUDataIn 		: in std_logic_vector(31 downto 0);
 		Set 				: in std_logic;
 		FunctI			: in std_logic_vector(2 downto 0);
-		MemoryDataIn 	: in std_logic_vector(31 downto 0);
+		MemoryDataIn 	: in std_logic_vector(31 downto 0);		
 		WrData 			: out std_logic_vector(31 downto 0)
 	);
 end MemMux;

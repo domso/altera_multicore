@@ -61,8 +61,8 @@ begin
 			  when others			 =>   Cond := false;
 			end case;
 			
-			MemByteEna	<= "0000";
-			MemWrData <= x"00000000";
+			MemByteEna	 <= "0000";
+			MemWrData 	 <= x"00000000";
 			Result		 := x"00000000";	
 		elsif (MemAccessI = '1') then
 			Result := std_logic_vector(to_signed(to_integer(signed(A)) + to_integer(signed(B)), 32)); --funct_ADD

@@ -42,12 +42,27 @@ test:
         ori     x15, x0, 0x56
         ori     x16, x0, 0x78
 
-        sb      x13, 0x223(x0)
-        sb      x14, 0x222(x0)
-        sb      x15, 0x121(x1)
-        sb      x16, 0x020(x2)
 
+
+	sw	x0, 0x220(x0)
+
+
+        sb      x13, 0x223(x0)
+	nop
+	lw	x17, 0x220(x0)
+
+        sb      x14, 0x222(x0)
+	nop
+	lw	x17, 0x220(x0)
+
+        sb      x15, 0x121(x1)
+	nop
+	lw	x17, 0x220(x0)
+
+	sb      x16, 0x020(x2)
+	nop
         lw      x17, 0x220(x0)      # 0x12345678
+
         mv      x18, x17
         mv      x18, x17
 
