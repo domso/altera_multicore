@@ -1,0 +1,26 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity SevenSeg is
+	Port (
+
+		
+		nRst        : in	std_logic;
+		Clk			: in	std_logic
+	);	
+end SevenSeg;
+
+architecture Behavioral of SevenSeg is
+begin
+process(nRst, Clk)
+begin
+
+if nRst = '0' then
+
+elsif rising_edge(Clk) then
+
+end process;
+
+
+end Behavioral;

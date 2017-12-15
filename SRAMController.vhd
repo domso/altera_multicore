@@ -58,7 +58,7 @@ elsif rising_edge(Clk) then
 	
 	case aktuellerZustand is	
 		when waitMemInstr =>			
-			if wren	= '1' and SRAM_address >=  then
+			if wren	= '1' and address(19) = '0' then
 				Stall <= '1';
 				
 				case byteena is
@@ -122,7 +122,7 @@ elsif rising_edge(Clk) then
 				
 				SRAM_Read_Enable_N	<= 'X';	
 				aktuellerZustand 		<= writeHighByte;
-			elsif byteena /= "0000" then
+			elsif byteena /= "0000" and address(19) = '0' then
 				Stall						<= '1';
 				SRAM_data				<= (others => 'Z');
 				SRAM_Read_Enable_N	<= '0';

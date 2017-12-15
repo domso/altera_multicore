@@ -160,9 +160,16 @@ agreement for further details.
 	(port
 		(pt 232 256)
 		(output)
-		(text "InterlockO" (rect 0 0 40 12)(font "Arial" ))
-		(text "InterlockO" (rect 171 251 211 263)(font "Arial" ))
+		(text "Set7Seg" (rect 0 0 33 12)(font "Arial" ))
+		(text "Set7Seg" (rect 178 251 211 263)(font "Arial" ))
 		(line (pt 232 256)(pt 216 256)(line_width 1))
+	)
+	(port
+		(pt 232 272)
+		(output)
+		(text "InterlockO" (rect 0 0 40 12)(font "Arial" ))
+		(text "InterlockO" (rect 171 267 211 279)(font "Arial" ))
+		(line (pt 232 272)(pt 216 272)(line_width 1))
 	)
 	(drawing
 		(rectangle (rect 16 16 216 288)(line_width 1))

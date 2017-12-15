@@ -43,6 +43,21 @@ test:
         ori     x16, x0, 0x78
 
 
+	addi	x18,x0,1
+blink_loop:
+	addi	x18,x18,1
+	csrrw	x0,  0x788, x18
+
+
+	add	x19,x0,x0
+	lui	x20, 8
+	for:
+		addi	x19, x19, 1
+		beq 	x19, x20, for_end
+		j for
+	for_end:
+
+j blink_loop
 
 	sw	x0, 0x220(x0)
 

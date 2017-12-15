@@ -6,27 +6,28 @@ use work.constants.all;
 
 entity decode is
 	Port (
-		Insn			: in std_logic_vector(31 downto 0);
-		Funct			: out std_logic_vector(2 downto 0);
-		SrcRegNo1	: out std_logic_vector(4 downto 0);
-		SrcRegNo2	: out std_logic_vector(4 downto 0);
-		DestRegNo	: out std_logic_vector(4 downto 0);
-		DestWrEn		: out std_logic;
-
-		Imm			: out std_logic_vector(31 downto 0);
-		SelSrc2		: out std_logic;
-		Aux			: out std_logic;
-		PCNextI		: in std_logic_vector(31 downto 0);
-		PCNextO		: out std_logic_vector(31 downto 0);
-		Jump			: out std_logic;
-		JumpRel		: out std_logic;
-		JumpTarget	: out std_logic_vector(31 downto 0);
-		MemAccess	: out std_logic;
-		MemWrEn		: out std_logic;
-		Clear			: in std_logic;
-		InterlockI	: in std_logic;
-		InterlockO	: out std_logic;
-		Stall			: in std_logic
+		Insn		  : in std_logic_vector(31 downto 0);
+		PCNextI	  : in std_logic_vector(31 downto 0);
+		Clear		  : in std_logic;
+		InterlockI : in std_logic;
+		Stall		  : in std_logic;	
+		
+		Funct		  : out std_logic_vector(2 downto 0);
+		SrcRegNo1  : out std_logic_vector(4 downto 0);
+		SrcRegNo2  : out std_logic_vector(4 downto 0);
+		DestRegNo  : out std_logic_vector(4 downto 0);
+		DestWrEn	  : out std_logic;
+		Imm		  : out std_logic_vector(31 downto 0);
+		SelSrc2	  : out std_logic;
+		Aux		  : out std_logic;
+		PCNextO	  : out std_logic_vector(31 downto 0);
+		Jump		  : out std_logic;
+		JumpRel	  : out std_logic;
+		JumpTarget : out std_logic_vector(31 downto 0);
+		MemAccess  : out std_logic;
+		MemWrEn	  : out std_logic;
+		Set7Seg	  : out std_logic;
+		InterlockO : out std_logic
 	);
 end decode;
 
@@ -54,6 +55,7 @@ begin
 		InterlockO	 <= '0';
 		MemAccess	 <= '0';
 		MemWrEn		 <= '0';
+		Set7Seg		 <= '0';
 	else	
 		case Insn(6 downto 0) is
 		when opcode_OP => 
@@ -75,6 +77,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			Set7Seg		 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -103,6 +106,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			Set7Seg		 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -122,6 +126,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			Set7Seg		 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -145,7 +150,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			
+			Set7Seg		 <= '0';			
 		when opcode_JALR =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -169,7 +174,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-				
+			Set7Seg		 <= '0';				
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -189,7 +194,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-				
+			Set7Seg		 <= '0';				
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -208,7 +213,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			
+			Set7Seg		 <= '0';			
 		when opcode_load =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -233,6 +238,7 @@ begin
 			InterlockO	 <= '1';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '0';
+			Set7Seg		 <= '0';
 		when opcode_store =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -257,6 +263,27 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '1';
+			Set7Seg		 <= '0';
+		when opcode_SYSTEM =>
+			Funct		 	 <= "000";
+			SrcRegNo1 	 <= Insn(19 downto 15);
+			SrcRegNo2 	 <= "00000";
+			DestRegNo 	 <= Insn(11 downto 7);
+			DestWrEn	 	 <= '0';
+			SelSrc2	 	 <= '0';
+			
+			Aux			 <= '0';			
+			Imm			 <= x"00000000" or Insn(31 downto 20);
+			
+			Jump		 	 <= '0';
+			JumpRel	 	 <= '0';
+			JumpTarget	 <= x"00000000";
+			PCNextO		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
+			Set7Seg		 <= '1';
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
@@ -276,6 +303,7 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			Set7Seg		 <= '0';
 		end case;
 	end if;
 end process;
