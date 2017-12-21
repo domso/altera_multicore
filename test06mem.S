@@ -1,4 +1,4 @@
-        .text
+       .text
         .globl  _start
 _start:
         ori     x1, x0, 0x100
@@ -6,8 +6,23 @@ _start:
         ori     x3, x0, -1
         ori     x4, x0, 0x018
 
-loop:
 
+
+
+
+
+
+
+	lui	x5, 0x300
+
+	add	x6, x0, 0x123
+
+	sw	x6, 0(x5)
+	nop
+	nop
+	lw	x7, 0(x5)
+
+loop:
 # Aufgabe 10/1:
 # Durch wren_b=1 werden 4 Schreibzugriffe mit folgenden Werten angezeigt:_
 #                                 address_b data_b
@@ -45,7 +60,9 @@ test:
 
 	addi	x18,x0,1
 blink_loop:
-	addi	x18,x18,1
+	lui	x18, 0xAAAAA
+	add	x18, x18, 0x555
+
 	csrrw	x0,  0x788, x18
 
 

@@ -32,8 +32,13 @@ if (InterlockI = '0' and Stall = '0') then
 		ImemAddr <= std_logic_vector(to_signed(to_integer(signed(PCOld)) + 4, 32))(11 downto 2);
 	end if;
 else
-	PCNext		<= PCOld;
-	ImemAddr 	<= PCOld(11 downto 2);
+	if (Jump = '1') then
+		ImemAddr 	<= JumpTarget(11 downto 2);
+		PCNext 		<= JumpTarget;	
+	else
+		PCNext		<= PCOld;
+		ImemAddr 	<= PCOld(11 downto 2);
+	end if;
 end if;
 
 end process;

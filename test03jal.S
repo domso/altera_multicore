@@ -6,6 +6,8 @@ _start:
         xor     x3, x3, x3
 
 lab1:
+	lui	sp, 0x300
+	sw	x0, -8(sp)
         jal     x5, lab2
         addi    x2, x2, 1
         addi    x2, x2, 2
