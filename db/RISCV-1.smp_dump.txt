@@ -1,5 +1,19 @@
 
-State Machine - |RISCV-1|SRAMController:inst10|aktuellerZustand
+State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:1:lastNode:n2|BusController:busControllerInstance|aktuellerZustand
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD 
+aktuellerZustand.STATE_FORWARD 0 0 0 0 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 1 
+aktuellerZustand.STATE_SEND 0 1 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 1 
+
+State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:0:firstNode:n0|BusController:busControllerInstance|aktuellerZustand
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD 
+aktuellerZustand.STATE_FORWARD 0 0 0 0 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 1 
+aktuellerZustand.STATE_SEND 0 1 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 1 
+
+State Machine - |multicore|SRAMControllerOnBus:SRAMCOntrollerInsance|aktuellerZustand
 Name aktuellerZustand.writeHighByte aktuellerZustand.readHighByte aktuellerZustand.readLowByte aktuellerZustand.waitMemInstr 
 aktuellerZustand.waitMemInstr 0 0 0 0 
 aktuellerZustand.readLowByte 0 0 1 1 

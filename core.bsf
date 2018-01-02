@@ -1,0 +1,114 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 16 16 808 176)
+	(text "core" (rect 5 0 85 27)(font "Liberation Sans" (font_size 8)))
+	(text "inst" (rect 8 132 83 156)(font "Liberation Sans" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "instr_q_a[31..0]" (rect 0 0 320 27)(font "Liberation Sans" (font_size 8)))
+		(text "instr_q_a[31..0]" (rect 21 27 341 54)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "instr_q_b[31..0]" (rect 0 0 320 27)(font "Liberation Sans" (font_size 8)))
+		(text "instr_q_b[31..0]" (rect 21 43 341 70)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "data_out[31..0]" (rect 0 0 300 27)(font "Liberation Sans" (font_size 8)))
+		(text "data_out[31..0]" (rect 21 59 321 86)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "Clk" (rect 0 0 60 27)(font "Liberation Sans" (font_size 8)))
+		(text "Clk" (rect 21 75 81 102)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "nRst" (rect 0 0 80 27)(font "Liberation Sans" (font_size 8)))
+		(text "nRst" (rect 21 91 101 118)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "Stall" (rect 0 0 100 27)(font "Liberation Sans" (font_size 8)))
+		(text "Stall" (rect 21 107 121 134)(font "Liberation Sans" (font_size 8)))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 792 32)
+		(output)
+		(text "instr_address_a[9..0]" (rect 0 0 421 27)(font "Liberation Sans" (font_size 8)))
+		(text "instr_address_a[9..0]" (rect 350 27 771 54)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 32)(pt 776 32)(line_width 3))
+	)
+	(port
+		(pt 792 48)
+		(output)
+		(text "instr_address_b[9..0]" (rect 0 0 421 27)(font "Liberation Sans" (font_size 8)))
+		(text "instr_address_b[9..0]" (rect 350 43 771 70)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 48)(pt 776 48)(line_width 3))
+	)
+	(port
+		(pt 792 64)
+		(output)
+		(text "data[31..0]" (rect 0 0 220 27)(font "Liberation Sans" (font_size 8)))
+		(text "data[31..0]" (rect 551 59 771 86)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 64)(pt 776 64)(line_width 3))
+	)
+	(port
+		(pt 792 80)
+		(output)
+		(text "address[31..0]" (rect 0 0 280 27)(font "Liberation Sans" (font_size 8)))
+		(text "address[31..0]" (rect 491 75 771 102)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 80)(pt 776 80)(line_width 3))
+	)
+	(port
+		(pt 792 96)
+		(output)
+		(text "byteEna[3..0]" (rect 0 0 260 27)(font "Liberation Sans" (font_size 8)))
+		(text "byteEna[3..0]" (rect 511 91 771 118)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 96)(pt 776 96)(line_width 3))
+	)
+	(port
+		(pt 792 112)
+		(output)
+		(text "wren" (rect 0 0 80 27)(font "Liberation Sans" (font_size 8)))
+		(text "wren" (rect 691 107 771 134)(font "Liberation Sans" (font_size 8)))
+		(line (pt 792 112)(pt 776 112))
+	)
+	(drawing
+		(rectangle (rect 16 16 776 144))
+	)
+)

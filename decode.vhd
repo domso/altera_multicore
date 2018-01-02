@@ -26,7 +26,6 @@ entity decode is
 		JumpTarget : out std_logic_vector(31 downto 0);
 		MemAccess  : out std_logic;
 		MemWrEn	  : out std_logic;
-		Set7Seg	  : out std_logic;
 		InterlockO : out std_logic
 	);
 end decode;
@@ -55,7 +54,6 @@ begin
 		InterlockO	 <= '0';
 		MemAccess	 <= '0';
 		MemWrEn		 <= '0';
-		Set7Seg		 <= '0';
 	else	
 		case Insn(6 downto 0) is
 		when opcode_OP => 
@@ -77,7 +75,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -106,7 +103,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -126,7 +122,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -149,8 +144,7 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';			
+			MemWrEn		 <= '0';		
 		when opcode_JALR =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -173,8 +167,7 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';				
+			MemWrEn		 <= '0';			
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -193,8 +186,7 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';				
+			MemWrEn		 <= '0';				
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "00000";
@@ -212,8 +204,7 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';			
+			MemWrEn		 <= '0';		
 		when opcode_load =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -238,7 +229,6 @@ begin
 			InterlockO	 <= '1';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';
 		when opcode_store =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -263,7 +253,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '1';
-			Set7Seg		 <= '0';
 		when opcode_SYSTEM =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= Insn(19 downto 15);
@@ -283,7 +272,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '1';
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
@@ -303,7 +291,6 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
-			Set7Seg		 <= '0';
 		end case;
 	end if;
 end process;

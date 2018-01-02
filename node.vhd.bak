@@ -1,0 +1,21 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.constants.all;
+
+
+entity node is
+	Port (
+
+	);
+end decode;
+
+architecture Behavioral of node is
+
+begin
+process()
+begin
+	
+end process;
+
+end Behavioral;
