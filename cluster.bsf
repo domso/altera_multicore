@@ -39,6 +39,13 @@ agreement for further details.
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
+		(pt 184 80)
+		(output)
+		(text "busAck[31..0]" (rect 0 0 55 12)(font "Arial" ))
+		(text "busAck[31..0]" (rect 108 75 163 87)(font "Arial" ))
+		(line (pt 184 80)(pt 168 80)(line_width 3))
+	)
+	(port
 		(pt 184 32)
 		(bidir)
 		(text "busData[31..0]" (rect 0 0 56 12)(font "Arial" ))

@@ -10,7 +10,9 @@ entity cluster is
 		
 		busData		: inout std_logic_vector(31 downto 0);
 		busAddr		: inout std_logic_vector(31 downto 0);
-		busCtrl		: inout std_logic_vector(31 downto 0)
+		busCtrl		: inout std_logic_vector(31 downto 0);
+		
+		busAck      : out std_logic_vector(31 downto 0)
 	);
 end cluster;
 
@@ -18,10 +20,11 @@ architecture Behavioral of cluster is
 	type vector32 is array (natural range <>) of std_logic_vector(31 downto 0);
 	signal signal_busAck : std_logic_vector(31 downto 0);
 
-		
-	signal signal_busReq : vector32(1 downto 0);
-		
-		
+	
+	constant num_core : integer := 4;	
+	signal signal_busReq : vector32((num_core - 1) downto 0);	
+	
+	
 component node	
 	generic (id : std_logic_vector(31 downto 0));
 	Port (		
@@ -41,7 +44,7 @@ end component;
 
 begin
 
-nodeCluster: for i in 0 to 1 generate
+nodeCluster: for i in 0 to (num_core - 1) generate
 
 firstNode: if i = 0 generate
 n0: node 
@@ -62,7 +65,7 @@ n0: node
 	);
 end generate firstNode;
 
-normalNode: if i > 0 and i < 1 generate
+normalNode: if i > 0 and i < (num_core - 1) generate
 n1: node 
 	generic map(
 		id			=> std_logic_vector(to_unsigned(i, 32))
@@ -81,7 +84,7 @@ n1: node
 	);
 end generate normalNode;
 
-lastNode: if i = 1 generate
+lastNode: if i = (num_core - 1) generate
 n2: node 
 	generic map(
 		id			=> std_logic_vector(to_unsigned(i, 32))
@@ -103,7 +106,11 @@ end generate nodeCluster;
 
 process(Clk)
 begin
-	
+if nRst = '0' then
+	busAck 	<= x"FFFFFFFF";
+elsif rising_edge(Clk) then
+	busAck <= signal_busAck;
+end if;
 end process;
 
 end Behavioral;

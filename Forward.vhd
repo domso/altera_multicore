@@ -7,11 +7,11 @@ use work.constants.all;
 entity Forward is
 	Port (		
 		DestWrEn_EX		: in std_logic;
-		DestRegNo_EX	: in std_logic_vector(4 downto 0);
+		DestRegNo_EX	: in std_logic_vector(5 downto 0);
 		DestData_EX		: in std_logic_vector(31 downto 0);
 		
 		DestWrEn_MEM	: in std_logic;
-		DestRegNo_MEM	: in std_logic_vector(4 downto 0);
+		DestRegNo_MEM	: in std_logic_vector(5 downto 0);
 		DestData_MEM	: in std_logic_vector(31 downto 0);
 		
 		FwdData1			: out std_logic_vector(31 downto 0);
@@ -21,8 +21,8 @@ entity Forward is
 		SrcData1			: in std_logic_vector(31 downto 0);
 		SrcData2			: in std_logic_vector(31 downto 0);
 
-		SrcRegNo1		: in std_logic_vector(4 downto 0);
-		SrcRegNo2		: in std_logic_vector(4 downto 0)
+		SrcRegNo1		: in std_logic_vector(5 downto 0);
+		SrcRegNo2		: in std_logic_vector(5 downto 0)
 	);
 end Forward;
 

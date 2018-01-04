@@ -6,11 +6,11 @@ use ieee.numeric_std.all;
 entity RegSet is
 	Port (
 		WrEn   					: in std_logic;
-		WrRegNo  				: in std_logic_vector(4 downto 0);
+		WrRegNo  				: in std_logic_vector(5 downto 0);
 		WrData   				: in std_logic_vector(31 downto 0);
 				
-		RdRegNo1 				: in std_logic_vector(4 downto 0);
-		RdRegNo2 				: in std_logic_vector(4 downto 0);
+		RdRegNo1 				: in std_logic_vector(5 downto 0);
+		RdRegNo2 				: in std_logic_vector(5 downto 0);
 		
 		RdData1   				: out std_logic_vector(31 downto 0);
 		RdData2   				: out std_logic_vector(31 downto 0);
@@ -22,7 +22,8 @@ end RegSet;
 
 architecture Behavioral of RegSet is
 TYPE TRegisters IS array (0 to 31) of std_logic_vector(31 downto 0);
-SIGNAL Registers : TRegisters;
+SIGNAL Registers    : TRegisters;
+SIGNAL SysRegisters : TRegisters;
 begin
 process(Clk, nRst, WrEn, WrData)
 begin
@@ -34,20 +35,17 @@ if nRst = '0' then
 	for i in 2 to 31
 	loop
 		Registers(i) <= x"00000000";
-	end loop;
-		
+	end loop;		
 elsif rising_edge(Clk) then
-
-	if WrEn = '1' and to_integer(unsigned(WrRegNo)) > 0 then
-		Registers(to_integer(unsigned(WrRegNo))) <= WrData;
+	if WrEn = '1' and to_integer(unsigned(WrRegNo(4 downto 0))) > 0 then
+		Registers(to_integer(unsigned(WrRegNo(4 downto 0)))) <= WrData;
 	end if;
-
 end if;
 
 end process;
 
 process(RdRegNo1, RdRegNo2)
-begin
+begin	
 	RdData1 <= Registers(to_integer(unsigned(RdRegNo1)));
 	RdData2 <= Registers(to_integer(unsigned(RdRegNo2)));
 end process;

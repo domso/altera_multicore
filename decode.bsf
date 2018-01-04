@@ -69,22 +69,22 @@ agreement for further details.
 	(port
 		(pt 232 48)
 		(output)
-		(text "SrcRegNo1[4..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "SrcRegNo1[4..0]" (rect 143 43 211 55)(font "Arial" ))
+		(text "SrcRegNo1[5..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "SrcRegNo1[5..0]" (rect 144 43 211 55)(font "Arial" ))
 		(line (pt 232 48)(pt 216 48)(line_width 3))
 	)
 	(port
 		(pt 232 64)
 		(output)
-		(text "SrcRegNo2[4..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "SrcRegNo2[4..0]" (rect 142 59 211 71)(font "Arial" ))
+		(text "SrcRegNo2[5..0]" (rect 0 0 68 12)(font "Arial" ))
+		(text "SrcRegNo2[5..0]" (rect 143 59 211 71)(font "Arial" ))
 		(line (pt 232 64)(pt 216 64)(line_width 3))
 	)
 	(port
 		(pt 232 80)
 		(output)
-		(text "DestRegNo[4..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "DestRegNo[4..0]" (rect 142 75 211 87)(font "Arial" ))
+		(text "DestRegNo[5..0]" (rect 0 0 68 12)(font "Arial" ))
+		(text "DestRegNo[5..0]" (rect 143 75 211 87)(font "Arial" ))
 		(line (pt 232 80)(pt 216 80)(line_width 3))
 	)
 	(port

@@ -17,6 +17,7 @@ entity SRAMControllerOnBus is
 		SRAM_High_Byte_N		: out std_logic;
 	
 		
+		busAck      : in	std_logic_vector(31 downto 0);
 		nRst        : in	std_logic;
 		Clk			: in	std_logic
 	);	
@@ -49,11 +50,10 @@ if nRst = '0' then
 	
 elsif rising_edge(Clk) then
 	SRAM_Chip_Enable_N	<= '0';
-	address				 			<= (others => 'Z');
 	
 	case aktuellerZustand is	
-		when waitMemInstr =>			
-			if ctrl /= x"00000000" and address(31) = '1' then				
+		when waitMemInstr =>		
+			if busAck /= x"FFFFFFFF" and ctrl(0) = '1' and address(31) = '1' then				
 				case ctrl(4 downto 1) is
 					when "0001" =>
 						SRAM_data					 <= "ZZZZZZZZ" & data(7 downto 0);
@@ -115,25 +115,28 @@ elsif rising_edge(Clk) then
 				
 				SRAM_Read_Enable_N	<= 'X';	
 				aktuellerZustand 		<= writeHighByte;
-			elsif ctrl(4 downto 1) /= "0000" and address(19) = '1' then
+				ctrl				 		<= x"FFFFFFFF";
+			elsif busAck /= x"FFFFFFFF" and ctrl(0) = '0' and address(31) = '1' then
 				SRAM_data				<= (others => 'Z');
 				SRAM_Read_Enable_N	<= '0';
 				SRAM_Write_Enable_N  <= '1';		
 				aktuellerZustand 		<= readLowByte;
 				SRAM_Low_Byte_N		<= '0';
 				SRAM_High_Byte_N		<= '0';
+			   ctrl				 		<= x"FFFFFFFF";
 			else
 				SRAM_data				<= (others => 'Z');
 				SRAM_Read_Enable_N	<= '1';
 				SRAM_Write_Enable_N  <= '1';	
 				SRAM_Low_Byte_N		<= '0';
 				SRAM_High_Byte_N		<= '0';
+				ctrl				 		<= (others => 'Z');
 			end if;				
 			
-			SRAM_address				<= address(19 downto 1) & "0";
-			SRAM_address_store		<= std_logic_vector(to_unsigned(to_integer(unsigned(address(18 downto 0) & "0")) + 1, 20));		
+			SRAM_address				<= address(20 downto 2) & "0";
+			SRAM_address_store		<= std_logic_vector(to_unsigned(to_integer(unsigned(address(20 downto 2) & "0")) + 1, 20));		
 			data				 			<= (others => 'Z');
-			ctrl				 			<= (others => 'Z');
+			address				 		<= (others => 'Z');
 		when readLowByte 	=>
 			SRAM_Read_Enable_N		<= '0';
 			SRAM_Write_Enable_N 		<= '1';		
@@ -141,7 +144,10 @@ elsif rising_edge(Clk) then
 			aktuellerZustand  		<= readHighByte;
 			SRAM_data_store			<= SRAM_data;
 			data				 			<= (others => 'Z');
-			ctrl				 			<= (others => 'Z');
+			ctrl				 			<= x"FFFFFFFF";
+			address				 		<= (others => 'Z');
+			--maybe?
+			SRAM_data					<= (others => 'Z');
 		when readHighByte =>			
 			SRAM_Read_Enable_N		<= '1';
 			SRAM_Write_Enable_N  	<= '1';	
@@ -150,6 +156,7 @@ elsif rising_edge(Clk) then
 			ctrl							<= x"00000000";
 			data 					 		<= SRAM_data & SRAM_data_store;
 			SRAM_data					<= (others => 'Z');
+			address				 		<= (others => 'Z');
 		when writeHighByte =>
 			SRAM_data					<= SRAM_data_store;
 			SRAM_Read_Enable_N		<= 'X';
@@ -158,6 +165,7 @@ elsif rising_edge(Clk) then
 			aktuellerZustand 			<= waitMemInstr;	
 			ctrl							<= x"00000000";
 			data				 			<= (others => 'Z');
+			address				 		<= (others => 'Z');
 	end case;
 end if;
 

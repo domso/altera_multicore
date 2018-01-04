@@ -34,8 +34,8 @@ agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "WrRegNo[4..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "WrRegNo[4..0]" (rect 21 43 85 55)(font "Arial" ))
+		(text "WrRegNo[5..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "WrRegNo[5..0]" (rect 21 43 84 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
@@ -48,15 +48,15 @@ agreement for further details.
 	(port
 		(pt 0 80)
 		(input)
-		(text "RdRegNo1[4..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "RdRegNo1[4..0]" (rect 21 75 88 87)(font "Arial" ))
+		(text "RdRegNo1[5..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "RdRegNo1[5..0]" (rect 21 75 87 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
 		(pt 0 96)
 		(input)
-		(text "RdRegNo2[4..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "RdRegNo2[4..0]" (rect 21 91 89 103)(font "Arial" ))
+		(text "RdRegNo2[5..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "RdRegNo2[5..0]" (rect 21 91 88 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port

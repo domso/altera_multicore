@@ -19,7 +19,7 @@ begin
 process(MemoryDataIn, ALUDataIn, Set)
 begin
 if (set = '1') then
-	if (ALUDataIn(21) = '1') then
+	if (ALUDataIn(31) = '1') then
 		case FunctI	is
 			when "000"  => 		
 				if (MemoryDataIn(7 + (to_integer(unsigned(ALUDataIn(1 downto 0))) * 8) downto 7 + (to_integer(unsigned(ALUDataIn(1 downto 0))) * 8)) = "1") then					

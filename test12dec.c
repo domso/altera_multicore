@@ -7,6 +7,30 @@ asm(
     ".section \".entry\"\n\t"
     ".global _start\n\t"
     "_start:\n\t"
+
+ "lui x1, 0x80000\n\t"
+
+"add x2, x0, 0x12\n\t"
+"sb x2, 0(x1)\n\t"
+
+"add x2, x0, 0x34\n\t"
+"sb x2, 1(x1)\n\t"
+
+"add x2, x0, 0x56\n\t"
+"sb x2, 2(x1)\n\t"
+
+"add x2, x0, 0x78\n\t"
+"sb x2, 3(x1)\n\t"
+
+"lw x3, 0(x1)\n\t"
+
+"lh x4, 0(x1)\n\t"
+"sll x5, x4, 16\n\t"
+"lh x4, 2(x1)\n\t"
+"add x5, x5, x4\n\t"
+
+
+   "j _start\n\t"
     "lui sp, 0x300\n\t"
     "jal main\n\t"
     ".global _exit\n\t"

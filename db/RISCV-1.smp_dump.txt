@@ -1,19 +1,37 @@
 
-State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:1:lastNode:n2|BusController:busControllerInstance|aktuellerZustand
-Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD 
-aktuellerZustand.STATE_FORWARD 0 0 0 0 
-aktuellerZustand.STATE_ACQUIRE 0 0 1 1 
-aktuellerZustand.STATE_SEND 0 1 0 1 
-aktuellerZustand.STATE_CLEAR 1 0 0 1 
+State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:3:lastNode:n2|BusController:busControllerInstance|aktuellerZustand
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD aktuellerZustand.STATE_READY 
+aktuellerZustand.STATE_READY 0 0 0 0 0 
+aktuellerZustand.STATE_FORWARD 0 0 0 1 1 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 0 1 
+aktuellerZustand.STATE_SEND 0 1 0 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 0 1 
+
+State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:2:normalNode:n1|BusController:busControllerInstance|aktuellerZustand
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD aktuellerZustand.STATE_READY 
+aktuellerZustand.STATE_READY 0 0 0 0 0 
+aktuellerZustand.STATE_FORWARD 0 0 0 1 1 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 0 1 
+aktuellerZustand.STATE_SEND 0 1 0 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 0 1 
+
+State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:1:normalNode:n1|BusController:busControllerInstance|aktuellerZustand
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD aktuellerZustand.STATE_READY 
+aktuellerZustand.STATE_READY 0 0 0 0 0 
+aktuellerZustand.STATE_FORWARD 0 0 0 1 1 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 0 1 
+aktuellerZustand.STATE_SEND 0 1 0 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 0 1 
 
 State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:0:firstNode:n0|BusController:busControllerInstance|aktuellerZustand
-Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD 
-aktuellerZustand.STATE_FORWARD 0 0 0 0 
-aktuellerZustand.STATE_ACQUIRE 0 0 1 1 
-aktuellerZustand.STATE_SEND 0 1 0 1 
-aktuellerZustand.STATE_CLEAR 1 0 0 1 
+Name aktuellerZustand.STATE_CLEAR aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD aktuellerZustand.STATE_READY 
+aktuellerZustand.STATE_READY 0 0 0 0 0 
+aktuellerZustand.STATE_FORWARD 0 0 0 1 1 
+aktuellerZustand.STATE_ACQUIRE 0 0 1 0 1 
+aktuellerZustand.STATE_SEND 0 1 0 0 1 
+aktuellerZustand.STATE_CLEAR 1 0 0 0 1 
 
-State Machine - |multicore|SRAMControllerOnBus:SRAMCOntrollerInsance|aktuellerZustand
+State Machine - |multicore|SRAMControllerOnBus:inst3|aktuellerZustand
 Name aktuellerZustand.writeHighByte aktuellerZustand.readHighByte aktuellerZustand.readLowByte aktuellerZustand.waitMemInstr 
 aktuellerZustand.waitMemInstr 0 0 0 0 
 aktuellerZustand.readLowByte 0 0 1 1 

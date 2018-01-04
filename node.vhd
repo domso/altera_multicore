@@ -133,6 +133,7 @@ busControllerInstance: BusController generic map (
 	wren => signal_wren,
 	byteEna => signal_byteEna,
 	
+	dataO => signal_data_out,
 	Stall => signal_stall
 );
 

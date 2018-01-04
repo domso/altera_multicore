@@ -6,12 +6,12 @@ entity MemStage is
 	Port (
 		FunctI			: in std_logic_vector(2 downto 0);
 		DestDataI		: in std_logic_vector(31 downto 0);
-		DestRegNoI		: in std_logic_vector(4 downto 0);
+		DestRegNoI		: in std_logic_vector(5 downto 0);
 		DestWrEnI		: in std_logic;
 		MemAccessI		: in std_logic;
 		
 		DestWrEnO		: out std_logic;
-		DestRegNoO		: out std_logic_vector(4 downto 0);
+		DestRegNoO		: out std_logic_vector(5 downto 0);
 		DestDataO		: out std_logic_vector(31 downto 0);
 		MemAccessO		: out std_logic;
 		FunctO			: out std_logic_vector(2 downto 0);
@@ -31,7 +31,7 @@ begin
 
 if nRst = '0' then
 	DestWrEnO		<= '0';
-	DestRegNoO		<= "00000";
+	DestRegNoO		<= "000000";
 	DestDataO		<= x"00000000";
 	MemAccessO		<= '0';
 	FunctO			<= "000";

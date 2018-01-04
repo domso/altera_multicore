@@ -41,8 +41,8 @@ agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "DestRegNoI[4..0]" (rect 0 0 71 12)(font "Arial" ))
-		(text "DestRegNoI[4..0]" (rect 21 59 92 71)(font "Arial" ))
+		(text "DestRegNoI[5..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "DestRegNoI[5..0]" (rect 21 59 91 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
@@ -90,8 +90,8 @@ agreement for further details.
 	(port
 		(pt 248 48)
 		(output)
-		(text "DestRegNoO[4..0]" (rect 0 0 76 12)(font "Arial" ))
-		(text "DestRegNoO[4..0]" (rect 151 43 227 55)(font "Arial" ))
+		(text "DestRegNoO[5..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "DestRegNoO[5..0]" (rect 152 43 227 55)(font "Arial" ))
 		(line (pt 248 48)(pt 232 48)(line_width 3))
 	)
 	(port

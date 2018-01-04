@@ -13,9 +13,9 @@ entity decode is
 		Stall		  : in std_logic;	
 		
 		Funct		  : out std_logic_vector(2 downto 0);
-		SrcRegNo1  : out std_logic_vector(4 downto 0);
-		SrcRegNo2  : out std_logic_vector(4 downto 0);
-		DestRegNo  : out std_logic_vector(4 downto 0);
+		SrcRegNo1  : out std_logic_vector(5 downto 0);
+		SrcRegNo2  : out std_logic_vector(5 downto 0);
+		DestRegNo  : out std_logic_vector(5 downto 0);
 		DestWrEn	  : out std_logic;
 		Imm		  : out std_logic_vector(31 downto 0);
 		SelSrc2	  : out std_logic;
@@ -38,9 +38,9 @@ begin
 	if (Clear = '1' or InterlockI = '1') then
 		DestWrEn	 	 <= '0'; 
 		Funct		 	 <= "000";
-		SrcRegNo1 	 <= "00000";
-		SrcRegNo2 	 <= "00000";
-		DestRegNo 	 <= "00000";
+		SrcRegNo1 	 <= "000000";
+		SrcRegNo2 	 <= "000000";
+		DestRegNo 	 <= "000000";
 		DestWrEn	 	 <= '0';
 		SelSrc2	 	 <= '0';	
 		Aux		 	 <= '0';
@@ -58,9 +58,9 @@ begin
 		case Insn(6 downto 0) is
 		when opcode_OP => 
 			Funct			 <= Insn(14 downto 12);
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= Insn(24 downto 20);
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & Insn(24 downto 20);
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '1';
 			
@@ -77,9 +77,9 @@ begin
 			MemWrEn		 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			
@@ -105,9 +105,9 @@ begin
 			MemWrEn		 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= "00000";
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & "00000";
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			Aux		 	 <= '0';
@@ -124,9 +124,9 @@ begin
 			MemWrEn		 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= "00000";
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & "00000";
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			Aux		 	 <= '0';
@@ -147,9 +147,9 @@ begin
 			MemWrEn		 <= '0';		
 		when opcode_JALR =>
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';	
 			Aux		 	 <= '0';
@@ -170,10 +170,10 @@ begin
 			MemWrEn		 <= '0';			
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= Insn(24 downto 20);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & Insn(24 downto 20);
 			
-			DestRegNo 	 <= "00000";
+			DestRegNo 	 <= "0" & "00000";
 			DestWrEn	 	 <= '0';
 			SelSrc2	 	 <= '1';	
 			Aux		 	 <= '0';
@@ -189,9 +189,9 @@ begin
 			MemWrEn		 <= '0';				
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= "00000";
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & "00000";
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			Aux		 	 <= '0';			
@@ -207,9 +207,9 @@ begin
 			MemWrEn		 <= '0';		
 		when opcode_load =>
 			Funct		 	 <= Insn(14 downto 12);
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '1';
 			SelSrc2	 	 <= '0';
 			
@@ -231,9 +231,9 @@ begin
 			MemWrEn		 <= '0';
 		when opcode_store =>
 			Funct		 	 <= Insn(14 downto 12);
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= Insn(24 downto 20);
-			DestRegNo 	 <= "00000";
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & Insn(24 downto 20);
+			DestRegNo 	 <= "0" & "00000";
 			DestWrEn	 	 <= '0';
 			SelSrc2	 	 <= '0';
 			
@@ -255,9 +255,9 @@ begin
 			MemWrEn		 <= '1';
 		when opcode_SYSTEM =>
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= Insn(19 downto 15);
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= Insn(11 downto 7);
+			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
 			DestWrEn	 	 <= '0';
 			SelSrc2	 	 <= '0';
 			
@@ -275,9 +275,9 @@ begin
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
-			SrcRegNo1 	 <= "00000";
-			SrcRegNo2 	 <= "00000";
-			DestRegNo 	 <= "00000";
+			SrcRegNo1 	 <= "0" & "00000";
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & "00000";
 			DestWrEn	 	 <= '0';
 			SelSrc2	 	 <= '0';	
 			Aux		 	 <= '0';

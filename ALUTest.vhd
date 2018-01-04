@@ -11,7 +11,7 @@ entity ALUTest is
 		Aux 			: in std_logic;
 	
 		DestWrEnI 	: in std_logic;
-		DestRegNoI 	: in std_logic_vector(4 downto 0);
+		DestRegNoI 	: in std_logic_vector(5 downto 0);
 		
 		
 		PCNext 		: in std_logic_vector(31 downto 0);
@@ -25,7 +25,7 @@ entity ALUTest is
 
 		JumpTargetO : out std_logic_vector(31 downto 0);
 		X 				: out std_logic_vector(31 downto 0);
-		DestRegNoO 	: out std_logic_vector(4 downto 0);
+		DestRegNoO 	: out std_logic_vector(5 downto 0);
 		DestWrEnO 	: out std_logic;
 		MemAccessO 	: out std_logic;
 		MemWrData	: out std_logic_vector(31 downto 0);
@@ -160,7 +160,7 @@ end process;
 process(DestRegNoI, Clear)
 begin
 	if (Clear = '1') then
-		DestRegNoO <= "00000";
+		DestRegNoO <= "000000";
 	else
 		DestRegNoO <= DestRegNoI;
 	end if;

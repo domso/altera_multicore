@@ -7,7 +7,7 @@ entity ExecuteStage is
 		FunctI		: in std_logic_vector(2 downto 0);
 		SrcData1I	: in std_logic_vector(31 downto 0);
 		SrcData2I	: in std_logic_vector(31 downto 0);
-		DestRegNoI	: in std_logic_vector(4 downto 0);
+		DestRegNoI	: in std_logic_vector(5 downto 0);
 		DestWrEnI	: in std_logic;
 		ImmI			: in std_logic_vector(31 downto 0);
 		SelSrc2I		: in std_logic;
@@ -32,7 +32,7 @@ entity ExecuteStage is
 		FunctO		: out std_logic_vector(2 downto 0);
 		AuxO			: out std_logic;
 		DestWrEnO	: out std_logic;
-		DestRegNoO	: out std_logic_vector(4 downto 0);
+		DestRegNoO	: out std_logic_vector(5 downto 0);
 		PCNextO		: out std_logic_vector(31 downto 0);
 		JumpO			: out std_logic;
 		JumpRelO		: out std_logic;
@@ -58,7 +58,7 @@ if nRst = '0' then
 	SelSrc2O     <= '0';
 	AuxO         <= '0';
 	DestWrEnO    <= '0';
-	DestRegNoO   <= "00000";
+	DestRegNoO   <= "000000";
 	PCNextO      <= x"00000000";
 	JumpO        <= '0';
 	JumpRelO     <= '0';
