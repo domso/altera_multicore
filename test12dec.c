@@ -8,7 +8,22 @@ asm(
     ".global _start\n\t"
     "_start:\n\t"
 
- "lui x1, 0x80000\n\t"
+
+"csrr x8, 0xf14\n\t"
+
+
+//"add x9, x0, 1\n\t"
+"lui x1, 0x80000\n\t"
+
+//"amoadd.w x10, x9, (x1)\n\t"
+
+"lr.w x11, 0(x1)\n\t"
+"sc.w x11, x8, (x1)\n\t"
+"lw x12, 0(x1)\n\t"
+
+
+
+
 
 "add x2, x0, 0x12\n\t"
 "sb x2, 0(x1)\n\t"

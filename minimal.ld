@@ -7,7 +7,8 @@ SECTIONS
         *(.entry)
         *(.text)
       }
-    . = 0x300000;
+    . = 0x80003000;
+
     .data : {
 	*(.data)
     }

@@ -26,6 +26,8 @@ entity decode is
 		JumpTarget : out std_logic_vector(31 downto 0);
 		MemAccess  : out std_logic;
 		MemWrEn	  : out std_logic;
+		MemFunc	  : out std_logic_vector(3 downto 0);
+		MemLink    : out std_logic;
 		InterlockO : out std_logic
 	);
 end decode;
@@ -54,6 +56,8 @@ begin
 		InterlockO	 <= '0';
 		MemAccess	 <= '0';
 		MemWrEn		 <= '0';
+		MemFunc 		 <= "0000";
+		MemLink		 <= '0';
 	else	
 		case Insn(6 downto 0) is
 		when opcode_OP => 
@@ -75,6 +79,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -103,6 +109,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -122,6 +130,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -145,6 +155,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';		
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_JALR =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -167,7 +179,9 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';			
+			MemWrEn		 <= '0';	
+			MemFunc 		 <= "0000";		
+			MemLink		 <= '0';
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -186,7 +200,9 @@ begin
 			
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
-			MemWrEn		 <= '0';				
+			MemWrEn		 <= '0';		
+			MemFunc 		 <= "0000";	
+			MemLink		 <= '0';	
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -205,6 +221,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';		
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_load =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -229,6 +247,8 @@ begin
 			InterlockO	 <= '1';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when opcode_store =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -253,13 +273,103 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '1';
 			MemWrEn		 <= '1';
-		when opcode_SYSTEM =>
-			Funct		 	 <= "000";
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
+		when opcode_ATOMIC =>
+			Funct		 	 <= "010"; --only word!
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			SrcRegNo2 	 <= "0" & Insn(24 downto 20);
+			DestRegNo 	 <= "0" & Insn(11 downto 7);
+			DestWrEn	 	 <= '1';
+			SelSrc2	 	 <= '0';
+			
+			Aux			 <= '0';
+			
+			Imm		    <= x"00000000";
+			
+			Jump		 	 <= '0';
+			JumpRel	 	 <= '0';
+			JumpTarget	 <= x"00000000";
+			PCNextO 		 <= PCNextI;		
+			
+			InterlockO	 <= '1';
+			MemAccess	 <= '1';
+			
+			case Insn(31 downto 27) is
+				when "00010"  => --LR
+					MemFunc <= "0000";
+					MemWrEn		 <= '0';
+					MemLink		 <= '1';				
+				when "00011"  => --SC
+					MemFunc <= "0000";
+					MemWrEn		 <= '1';	
+					MemLink		 <= '1';		
+				when "00001"  => --AMOSWAP
+					MemFunc <= "0001";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "00000"  => --AMOADD
+					MemFunc <= "0010";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "00100"  => --AMOXOR
+					MemFunc <= "0011";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "01100"  => --AMOAND
+					MemFunc <= "0100";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "01000"  => --AMOOR
+					MemFunc <= "0101";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "10000"  => --AMOMIN
+					MemFunc <= "0110";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "10100"  => --AMOMAX
+					MemFunc <= "0111";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "11000"  => --AMOMINU
+					MemFunc <= "1000";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when "11100"  => --AMOMAXU
+					MemFunc <= "1001";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+				when others =>
+					MemFunc <= "0000";
+					MemWrEn		 <= '0';
+					MemLink		 <= '0';
+			end case;
+		when opcode_SYSTEM => -- currently read only
+			Funct		 	 <= "000";
+			
+			case Insn(31 downto 20) is
+				when x"F10"  => --misa ISA and extensions supported.
+					SrcRegNo1 <= "100000";
+				when x"F11"  => --mvendorid Vendor ID.
+					SrcRegNo1 <= "100001";
+				when x"F12"  => --marchid Architecture ID.
+					SrcRegNo1 <= "100010";
+				when x"F13"  => --mimpid Implementation ID.
+					SrcRegNo1 <= "100011";
+				when x"F14"  => --mhartid Hardware thread ID.
+					SrcRegNo1 <= "100100";
+				when others =>
+					SrcRegNo1 <= "000000";
+			end case;
+			
+			--SrcRegNo1 	 <= "0" & Insn(19 downto 15);
+			
+			
 			SrcRegNo2 	 <= "0" & "00000";
 			DestRegNo 	 <= "0" & Insn(11 downto 7);
-			DestWrEn	 	 <= '0';
-			SelSrc2	 	 <= '0';
+			DestWrEn	 	 <= '1';
+			SelSrc2	 	 <= '1';
 			
 			Aux			 <= '0';			
 			Imm			 <= x"00000000" or Insn(31 downto 20);
@@ -272,6 +382,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
@@ -291,6 +403,8 @@ begin
 			InterlockO	 <= '0';
 			MemAccess	 <= '0';
 			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
 		end case;
 	end if;
 end process;

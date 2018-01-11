@@ -18,6 +18,8 @@ entity ExecuteStage is
 		JumpTargetI	: in std_logic_vector(31 downto 0);
 		MemAccessI	: in std_logic;
 		MemWrEnI		: in std_logic;
+		MemFuncI  	: in std_logic_vector(3 downto 0);
+		MemLinkI	   : in std_logic;
 		ClearI		: in std_logic;
 		StallI		: in std_logic;
 		nRst   		: in std_logic;
@@ -40,7 +42,9 @@ entity ExecuteStage is
 		MemAccessO	: out std_logic;
 		MemWrEnO		: out std_logic;
 		ClearO		: out std_logic;
-		StallO		: out std_logic
+		StallO		: out std_logic;
+		MemFuncO	   : out std_logic_vector(3 downto 0);
+		MemLinkO	   : out std_logic
 	);
 end ExecuteStage;
 
@@ -65,6 +69,8 @@ if nRst = '0' then
 	JumpTargetO  <= x"00000000";
 	MemAccessO   <= '0';
 	MemWrEnO     <= '0';
+	MemFuncO	    <= "0000";
+	MemLinkO	    <= '0';
 	ClearO       <= '0';
 	StallO       <= '0';
 elsif rising_edge(Clk) then
@@ -89,6 +95,9 @@ elsif rising_edge(Clk) then
 			MemAccessO   <= '0';
 			MemWrEnO     <= '0';	
 		end if;
+		
+		MemFuncO	    <= MemFuncI;
+		MemLinkO		 <= MemLinkI;
 			
 		ClearO       <= ClearI;
 		StallO       <= StallI;

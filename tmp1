@@ -1,0 +1,390 @@
+
+main.cpp.rv32.elf:     Dateiformat elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	f1402473          	csrr	s0,mhartid
+   4:	40000093          	li	ra,1024
+   8:	00809133          	sll	sp,ra,s0
+   c:	800001b7          	lui	gp,0x80000
+  10:	003100b3          	add	ra,sp,gp
+  14:	00100133          	add	sp,zero,ra
+  18:	00800533          	add	a0,zero,s0
+  1c:	168000ef          	jal	184 <entry_cpp>
+
+00000020 <exit>:
+  20:	0000006f          	j	20 <exit>
+  24:	800000b7          	lui	ra,0x80000
+  28:	1000a5af          	lr.w	a1,(ra)
+  2c:	1880a5af          	sc.w	a1,s0,(ra)
+  30:	0000a603          	lw	a2,0(ra) # 80000000 <counter+0xffffcffc>
+  34:	01200113          	li	sp,18
+  38:	00208023          	sb	sp,0(ra)
+  3c:	03400113          	li	sp,52
+  40:	002080a3          	sb	sp,1(ra)
+  44:	05600113          	li	sp,86
+  48:	00208123          	sb	sp,2(ra)
+  4c:	07800113          	li	sp,120
+  50:	002081a3          	sb	sp,3(ra)
+  54:	0000a183          	lw	gp,0(ra)
+  58:	00009203          	lh	tp,0(ra)
+  5c:	01021293          	slli	t0,tp,0x10
+  60:	00209203          	lh	tp,2(ra)
+  64:	004282b3          	add	t0,t0,tp
+  68:	f99ff06f          	j	0 <_start>
+  6c:	00300137          	lui	sp,0x300
+  70:	114000ef          	jal	184 <entry_cpp>
+
+00000074 <_exit>:
+  74:	0000006f          	j	74 <_exit>
+
+00000078 <_Z13convert_digiti>:
+  78:	fe010113          	addi	sp,sp,-32 # 2fffe0 <_ZL5digit+0x2ffa84>
+  7c:	00112e23          	sw	ra,28(sp)
+  80:	00812c23          	sw	s0,24(sp)
+  84:	00912a23          	sw	s1,20(sp)
+  88:	02010413          	addi	s0,sp,32
+  8c:	fea42623          	sw	a0,-20(s0)
+  90:	fec42783          	lw	a5,-20(s0)
+  94:	3e800593          	li	a1,1000
+  98:	00078513          	mv	a0,a5
+  9c:	2d4000ef          	jal	370 <__divsi3>
+  a0:	00050793          	mv	a5,a0
+  a4:	00a00593          	li	a1,10
+  a8:	00078513          	mv	a0,a5
+  ac:	348000ef          	jal	3f4 <__modsi3>
+  b0:	00050793          	mv	a5,a0
+  b4:	00078713          	mv	a4,a5
+  b8:	55c00793          	li	a5,1372
+  bc:	00f707b3          	add	a5,a4,a5
+  c0:	0007c783          	lbu	a5,0(a5)
+  c4:	01879493          	slli	s1,a5,0x18
+  c8:	fec42783          	lw	a5,-20(s0)
+  cc:	06400593          	li	a1,100
+  d0:	00078513          	mv	a0,a5
+  d4:	29c000ef          	jal	370 <__divsi3>
+  d8:	00050793          	mv	a5,a0
+  dc:	00a00593          	li	a1,10
+  e0:	00078513          	mv	a0,a5
+  e4:	310000ef          	jal	3f4 <__modsi3>
+  e8:	00050793          	mv	a5,a0
+  ec:	00078713          	mv	a4,a5
+  f0:	55c00793          	li	a5,1372
+  f4:	00f707b3          	add	a5,a4,a5
+  f8:	0007c783          	lbu	a5,0(a5)
+  fc:	01079793          	slli	a5,a5,0x10
+ 100:	00f4e4b3          	or	s1,s1,a5
+ 104:	fec42783          	lw	a5,-20(s0)
+ 108:	00a00593          	li	a1,10
+ 10c:	00078513          	mv	a0,a5
+ 110:	260000ef          	jal	370 <__divsi3>
+ 114:	00050793          	mv	a5,a0
+ 118:	00a00593          	li	a1,10
+ 11c:	00078513          	mv	a0,a5
+ 120:	2d4000ef          	jal	3f4 <__modsi3>
+ 124:	00050793          	mv	a5,a0
+ 128:	00078713          	mv	a4,a5
+ 12c:	55c00793          	li	a5,1372
+ 130:	00f707b3          	add	a5,a4,a5
+ 134:	0007c783          	lbu	a5,0(a5)
+ 138:	00879793          	slli	a5,a5,0x8
+ 13c:	00f4e4b3          	or	s1,s1,a5
+ 140:	fec42783          	lw	a5,-20(s0)
+ 144:	00a00593          	li	a1,10
+ 148:	00078513          	mv	a0,a5
+ 14c:	2a8000ef          	jal	3f4 <__modsi3>
+ 150:	00050793          	mv	a5,a0
+ 154:	00078713          	mv	a4,a5
+ 158:	55c00793          	li	a5,1372
+ 15c:	00f707b3          	add	a5,a4,a5
+ 160:	0007c783          	lbu	a5,0(a5)
+ 164:	00f4e7b3          	or	a5,s1,a5
+ 168:	fff7c793          	not	a5,a5
+ 16c:	00078513          	mv	a0,a5
+ 170:	01c12083          	lw	ra,28(sp)
+ 174:	01812403          	lw	s0,24(sp)
+ 178:	01412483          	lw	s1,20(sp)
+ 17c:	02010113          	addi	sp,sp,32
+ 180:	00008067          	ret
+
+00000184 <entry_cpp>:
+ 184:	f9010113          	addi	sp,sp,-112
+ 188:	06112623          	sw	ra,108(sp)
+ 18c:	06812423          	sw	s0,104(sp)
+ 190:	07010413          	addi	s0,sp,112
+ 194:	f8a42e23          	sw	a0,-100(s0)
+ 198:	fe042623          	sw	zero,-20(s0)
+ 19c:	00400793          	li	a5,4
+ 1a0:	faf42423          	sw	a5,-88(s0)
+ 1a4:	fe042023          	sw	zero,-32(s0)
+ 1a8:	fc042e23          	sw	zero,-36(s0)
+ 1ac:	000107b7          	lui	a5,0x10
+ 1b0:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 1b4:	fdc42503          	lw	a0,-36(s0)
+ 1b8:	26c000ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 1bc:	fca42c23          	sw	a0,-40(s0)
+ 1c0:	800037b7          	lui	a5,0x80003
+ 1c4:	00478793          	addi	a5,a5,4 # 80003004 <counter+0x0>
+ 1c8:	fe042703          	lw	a4,-32(s0)
+ 1cc:	0ee7a02f          	amoswap.w.sc	zero,a4,(a5)
+ 1d0:	00100793          	li	a5,1
+ 1d4:	fef42423          	sw	a5,-24(s0)
+ 1d8:	fe042223          	sw	zero,-28(s0)
+ 1dc:	800037b7          	lui	a5,0x80003
+ 1e0:	00478793          	addi	a5,a5,4 # 80003004 <counter+0x0>
+ 1e4:	fe842703          	lw	a4,-24(s0)
+ 1e8:	06e7a6af          	amoadd.w.sc	a3,a4,(a5)
+ 1ec:	f9c42703          	lw	a4,-100(s0)
+ 1f0:	00100793          	li	a5,1
+ 1f4:	08f71e63          	bne	a4,a5,290 <entry_cpp+0x10c>
+ 1f8:	02a00793          	li	a5,42
+ 1fc:	fcf42a23          	sw	a5,-44(s0)
+ 200:	fc042823          	sw	zero,-48(s0)
+ 204:	fd042503          	lw	a0,-48(s0)
+ 208:	298000ef          	jal	4a0 <_ZSt23__cmpexch_failure_orderSt12memory_order>
+ 20c:	00050713          	mv	a4,a0
+ 210:	800037b7          	lui	a5,0x80003
+ 214:	00478793          	addi	a5,a5,4 # 80003004 <counter+0x0>
+ 218:	fcf42623          	sw	a5,-52(s0)
+ 21c:	fa840793          	addi	a5,s0,-88
+ 220:	fcf42423          	sw	a5,-56(s0)
+ 224:	fd442783          	lw	a5,-44(s0)
+ 228:	fcf42223          	sw	a5,-60(s0)
+ 22c:	fd042783          	lw	a5,-48(s0)
+ 230:	fcf42023          	sw	a5,-64(s0)
+ 234:	fae42e23          	sw	a4,-68(s0)
+ 238:	000107b7          	lui	a5,0x10
+ 23c:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 240:	fbc42503          	lw	a0,-68(s0)
+ 244:	1e0000ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 248:	faa42c23          	sw	a0,-72(s0)
+ 24c:	000107b7          	lui	a5,0x10
+ 250:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 254:	fc042503          	lw	a0,-64(s0)
+ 258:	1cc000ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 25c:	faa42a23          	sw	a0,-76(s0)
+ 260:	fcc42603          	lw	a2,-52(s0)
+ 264:	fc442583          	lw	a1,-60(s0)
+ 268:	fc842783          	lw	a5,-56(s0)
+ 26c:	0007a683          	lw	a3,0(a5)
+ 270:	1606272f          	lr.w.sc	a4,(a2)
+ 274:	00d71663          	bne	a4,a3,280 <entry_cpp+0xfc>
+ 278:	1eb6252f          	sc.w.sc	a0,a1,(a2)
+ 27c:	fe051ae3          	bnez	a0,270 <entry_cpp+0xec>
+ 280:	40d706b3          	sub	a3,a4,a3
+ 284:	0016b693          	seqz	a3,a3
+ 288:	00069463          	bnez	a3,290 <entry_cpp+0x10c>
+ 28c:	00e7a023          	sw	a4,0(a5)
+ 290:	f9c42783          	lw	a5,-100(s0)
+ 294:	04079063          	bnez	a5,2d4 <entry_cpp+0x150>
+ 298:	fa042823          	sw	zero,-80(s0)
+ 29c:	000107b7          	lui	a5,0x10
+ 2a0:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 2a4:	fb042503          	lw	a0,-80(s0)
+ 2a8:	17c000ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 2ac:	faa42623          	sw	a0,-84(s0)
+ 2b0:	800037b7          	lui	a5,0x80003
+ 2b4:	00478793          	addi	a5,a5,4 # 80003004 <counter+0x0>
+ 2b8:	0330000f          	fence	rw,rw
+ 2bc:	0007a783          	lw	a5,0(a5)
+ 2c0:	0330000f          	fence	rw,rw
+ 2c4:	00078713          	mv	a4,a5
+ 2c8:	fec42783          	lw	a5,-20(s0)
+ 2cc:	00e7a023          	sw	a4,0(a5)
+ 2d0:	fc9ff06f          	j	298 <entry_cpp+0x114>
+ 2d4:	00000013          	nop
+ 2d8:	00078513          	mv	a0,a5
+ 2dc:	06c12083          	lw	ra,108(sp)
+ 2e0:	06812403          	lw	s0,104(sp)
+ 2e4:	07010113          	addi	sp,sp,112
+ 2e8:	00008067          	ret
+
+000002ec <_Z41__static_initialization_and_destruction_0ii>:
+ 2ec:	fe010113          	addi	sp,sp,-32
+ 2f0:	00112e23          	sw	ra,28(sp)
+ 2f4:	00812c23          	sw	s0,24(sp)
+ 2f8:	02010413          	addi	s0,sp,32
+ 2fc:	fea42623          	sw	a0,-20(s0)
+ 300:	feb42423          	sw	a1,-24(s0)
+ 304:	fec42703          	lw	a4,-20(s0)
+ 308:	00100793          	li	a5,1
+ 30c:	02f71063          	bne	a4,a5,32c <_Z41__static_initialization_and_destruction_0ii+0x40>
+ 310:	fe842703          	lw	a4,-24(s0)
+ 314:	000107b7          	lui	a5,0x10
+ 318:	fff78793          	addi	a5,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 31c:	00f71863          	bne	a4,a5,32c <_Z41__static_initialization_and_destruction_0ii+0x40>
+ 320:	800037b7          	lui	a5,0x80003
+ 324:	00478513          	addi	a0,a5,4 # 80003004 <counter+0x0>
+ 328:	200000ef          	jal	528 <_ZNSt6atomicIiEC1Ev>
+ 32c:	00000013          	nop
+ 330:	01c12083          	lw	ra,28(sp)
+ 334:	01812403          	lw	s0,24(sp)
+ 338:	02010113          	addi	sp,sp,32
+ 33c:	00008067          	ret
+
+00000340 <_GLOBAL__sub_I__Z13convert_digiti>:
+ 340:	ff010113          	addi	sp,sp,-16
+ 344:	00112623          	sw	ra,12(sp)
+ 348:	00812423          	sw	s0,8(sp)
+ 34c:	01010413          	addi	s0,sp,16
+ 350:	000107b7          	lui	a5,0x10
+ 354:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 358:	00100513          	li	a0,1
+ 35c:	f91ff0ef          	jal	2ec <_Z41__static_initialization_and_destruction_0ii>
+ 360:	00c12083          	lw	ra,12(sp)
+ 364:	00812403          	lw	s0,8(sp)
+ 368:	01010113          	addi	sp,sp,16
+ 36c:	00008067          	ret
+
+00000370 <__divsi3>:
+ 370:	06054063          	bltz	a0,3d0 <__umodsi3+0x10>
+ 374:	0605c663          	bltz	a1,3e0 <__umodsi3+0x20>
+
+00000378 <__udivsi3>:
+ 378:	00058613          	mv	a2,a1
+ 37c:	00050593          	mv	a1,a0
+ 380:	fff00513          	li	a0,-1
+ 384:	02060c63          	beqz	a2,3bc <__udivsi3+0x44>
+ 388:	00100693          	li	a3,1
+ 38c:	00b67a63          	bleu	a1,a2,3a0 <__udivsi3+0x28>
+ 390:	00c05863          	blez	a2,3a0 <__udivsi3+0x28>
+ 394:	00161613          	slli	a2,a2,0x1
+ 398:	00169693          	slli	a3,a3,0x1
+ 39c:	feb66ae3          	bltu	a2,a1,390 <__udivsi3+0x18>
+ 3a0:	00000513          	li	a0,0
+ 3a4:	00c5e663          	bltu	a1,a2,3b0 <__udivsi3+0x38>
+ 3a8:	40c585b3          	sub	a1,a1,a2
+ 3ac:	00d56533          	or	a0,a0,a3
+ 3b0:	0016d693          	srli	a3,a3,0x1
+ 3b4:	00165613          	srli	a2,a2,0x1
+ 3b8:	fe0696e3          	bnez	a3,3a4 <__udivsi3+0x2c>
+ 3bc:	00008067          	ret
+
+000003c0 <__umodsi3>:
+ 3c0:	00008293          	mv	t0,ra
+ 3c4:	fb5ff0ef          	jal	378 <__udivsi3>
+ 3c8:	00058513          	mv	a0,a1
+ 3cc:	00028067          	jr	t0
+ 3d0:	40a00533          	neg	a0,a0
+ 3d4:	0005d863          	bgez	a1,3e4 <__umodsi3+0x24>
+ 3d8:	40b005b3          	neg	a1,a1
+ 3dc:	f95ff06f          	j	370 <__divsi3>
+ 3e0:	40b005b3          	neg	a1,a1
+ 3e4:	00008293          	mv	t0,ra
+ 3e8:	f89ff0ef          	jal	370 <__divsi3>
+ 3ec:	40a00533          	neg	a0,a0
+ 3f0:	00028067          	jr	t0
+
+000003f4 <__modsi3>:
+ 3f4:	00008293          	mv	t0,ra
+ 3f8:	0005ca63          	bltz	a1,40c <__modsi3+0x18>
+ 3fc:	00054c63          	bltz	a0,414 <__modsi3+0x20>
+ 400:	f79ff0ef          	jal	378 <__udivsi3>
+ 404:	00058513          	mv	a0,a1
+ 408:	00028067          	jr	t0
+ 40c:	40b005b3          	neg	a1,a1
+ 410:	fe0558e3          	bgez	a0,400 <__modsi3+0xc>
+ 414:	40a00533          	neg	a0,a0
+ 418:	f61ff0ef          	jal	378 <__udivsi3>
+ 41c:	40b00533          	neg	a0,a1
+ 420:	00028067          	jr	t0
+
+Disassembly of section .text._ZStanSt12memory_orderSt23__memory_order_modifier:
+
+00000424 <_ZStanSt12memory_orderSt23__memory_order_modifier>:
+ 424:	fe010113          	addi	sp,sp,-32
+ 428:	00812e23          	sw	s0,28(sp)
+ 42c:	02010413          	addi	s0,sp,32
+ 430:	fea42623          	sw	a0,-20(s0)
+ 434:	feb42423          	sw	a1,-24(s0)
+ 438:	fec42703          	lw	a4,-20(s0)
+ 43c:	fe842783          	lw	a5,-24(s0)
+ 440:	00f777b3          	and	a5,a4,a5
+ 444:	00078513          	mv	a0,a5
+ 448:	01c12403          	lw	s0,28(sp)
+ 44c:	02010113          	addi	sp,sp,32
+ 450:	00008067          	ret
+
+Disassembly of section .text._ZSt24__cmpexch_failure_order2St12memory_order:
+
+00000454 <_ZSt24__cmpexch_failure_order2St12memory_order>:
+ 454:	fe010113          	addi	sp,sp,-32
+ 458:	00812e23          	sw	s0,28(sp)
+ 45c:	02010413          	addi	s0,sp,32
+ 460:	fea42623          	sw	a0,-20(s0)
+ 464:	fec42703          	lw	a4,-20(s0)
+ 468:	00400793          	li	a5,4
+ 46c:	02f70063          	beq	a4,a5,48c <_ZSt24__cmpexch_failure_order2St12memory_order+0x38>
+ 470:	fec42703          	lw	a4,-20(s0)
+ 474:	00300793          	li	a5,3
+ 478:	00f70663          	beq	a4,a5,484 <_ZSt24__cmpexch_failure_order2St12memory_order+0x30>
+ 47c:	fec42783          	lw	a5,-20(s0)
+ 480:	0100006f          	j	490 <_ZSt24__cmpexch_failure_order2St12memory_order+0x3c>
+ 484:	00000793          	li	a5,0
+ 488:	0080006f          	j	490 <_ZSt24__cmpexch_failure_order2St12memory_order+0x3c>
+ 48c:	00200793          	li	a5,2
+ 490:	00078513          	mv	a0,a5
+ 494:	01c12403          	lw	s0,28(sp)
+ 498:	02010113          	addi	sp,sp,32
+ 49c:	00008067          	ret
+
+Disassembly of section .text._ZSt23__cmpexch_failure_orderSt12memory_order:
+
+000004a0 <_ZSt23__cmpexch_failure_orderSt12memory_order>:
+ 4a0:	fe010113          	addi	sp,sp,-32
+ 4a4:	00112e23          	sw	ra,28(sp)
+ 4a8:	00812c23          	sw	s0,24(sp)
+ 4ac:	00912a23          	sw	s1,20(sp)
+ 4b0:	02010413          	addi	s0,sp,32
+ 4b4:	fea42623          	sw	a0,-20(s0)
+ 4b8:	000107b7          	lui	a5,0x10
+ 4bc:	fff78593          	addi	a1,a5,-1 # ffff <_ZL5digit+0xfaa3>
+ 4c0:	fec42503          	lw	a0,-20(s0)
+ 4c4:	f61ff0ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 4c8:	00050793          	mv	a5,a0
+ 4cc:	00078513          	mv	a0,a5
+ 4d0:	f85ff0ef          	jal	454 <_ZSt24__cmpexch_failure_order2St12memory_order>
+ 4d4:	00050793          	mv	a5,a0
+ 4d8:	00078493          	mv	s1,a5
+ 4dc:	ffff05b7          	lui	a1,0xffff0
+ 4e0:	fec42503          	lw	a0,-20(s0)
+ 4e4:	f41ff0ef          	jal	424 <_ZStanSt12memory_orderSt23__memory_order_modifier>
+ 4e8:	00050793          	mv	a5,a0
+ 4ec:	00f4e7b3          	or	a5,s1,a5
+ 4f0:	00078513          	mv	a0,a5
+ 4f4:	01c12083          	lw	ra,28(sp)
+ 4f8:	01812403          	lw	s0,24(sp)
+ 4fc:	01412483          	lw	s1,20(sp)
+ 500:	02010113          	addi	sp,sp,32
+ 504:	00008067          	ret
+
+Disassembly of section .text._ZNSt13__atomic_baseIiEC2Ev:
+
+00000508 <_ZNSt13__atomic_baseIiEC1Ev>:
+ 508:	fe010113          	addi	sp,sp,-32
+ 50c:	00812e23          	sw	s0,28(sp)
+ 510:	02010413          	addi	s0,sp,32
+ 514:	fea42623          	sw	a0,-20(s0)
+ 518:	00000013          	nop
+ 51c:	01c12403          	lw	s0,28(sp)
+ 520:	02010113          	addi	sp,sp,32
+ 524:	00008067          	ret
+
+Disassembly of section .text._ZNSt6atomicIiEC2Ev:
+
+00000528 <_ZNSt6atomicIiEC1Ev>:
+ 528:	fe010113          	addi	sp,sp,-32
+ 52c:	00112e23          	sw	ra,28(sp)
+ 530:	00812c23          	sw	s0,24(sp)
+ 534:	02010413          	addi	s0,sp,32
+ 538:	fea42623          	sw	a0,-20(s0)
+ 53c:	fec42783          	lw	a5,-20(s0)
+ 540:	00078513          	mv	a0,a5
+ 544:	fc5ff0ef          	jal	508 <_ZNSt13__atomic_baseIiEC1Ev>
+ 548:	00000013          	nop
+ 54c:	01c12083          	lw	ra,28(sp)
+ 550:	01812403          	lw	s0,24(sp)
+ 554:	02010113          	addi	sp,sp,32
+ 558:	00008067          	ret

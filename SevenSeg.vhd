@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity SevenSeg is
 	Port (	
-		set  : in  std_logic;
-		V	  : in  std_logic_vector(31 downto 0);		
+		V	  : in  std_logic_vector(31 downto 0);	
+		set  : in  std_logic;	
 		nRst : in  std_logic;
 		Clk  : in  std_logic;
 		

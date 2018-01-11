@@ -27,16 +27,16 @@ agreement for further details.
 	(port
 		(pt 0 32)
 		(input)
-		(text "set" (rect 0 0 11 12)(font "Arial" ))
-		(text "set" (rect 21 27 32 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "V[31..0]" (rect 0 0 31 12)(font "Arial" ))
+		(text "V[31..0]" (rect 21 27 52 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "V[31..0]" (rect 0 0 31 12)(font "Arial" ))
-		(text "V[31..0]" (rect 21 43 52 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
+		(text "set" (rect 0 0 11 12)(font "Arial" ))
+		(text "set" (rect 21 43 32 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
 		(pt 0 64)

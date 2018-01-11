@@ -26,7 +26,7 @@ architecture Behavioral of cluster is
 	
 	
 component node	
-	generic (id : std_logic_vector(31 downto 0));
+	generic (mhartid : std_logic_vector(31 downto 0));
 	Port (		
 		nRst   					: in std_logic;
 		Clk   					: in std_logic;
@@ -49,7 +49,7 @@ nodeCluster: for i in 0 to (num_core - 1) generate
 firstNode: if i = 0 generate
 n0: node 
 	generic map(
-		id			=> std_logic_vector(to_unsigned(i, 32))
+		mhartid			=> std_logic_vector(to_unsigned(i, 32))
 	)
 	port map (
 		nRst 		=> nRst,
@@ -68,7 +68,7 @@ end generate firstNode;
 normalNode: if i > 0 and i < (num_core - 1) generate
 n1: node 
 	generic map(
-		id			=> std_logic_vector(to_unsigned(i, 32))
+		mhartid			=> std_logic_vector(to_unsigned(i, 32))
 	)
 	port map (
 		nRst 		=> nRst,
@@ -84,10 +84,10 @@ n1: node
 	);
 end generate normalNode;
 
-lastNode: if i = (num_core - 1) generate
+lastNode: if i = (num_core - 1) and num_core > 1 generate
 n2: node 
 	generic map(
-		id			=> std_logic_vector(to_unsigned(i, 32))
+		mhartid			=> std_logic_vector(to_unsigned(i, 32))
 	)
 	port map (
 		nRst 		=> nRst,

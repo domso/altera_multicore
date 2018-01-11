@@ -33,17 +33,17 @@ process(SrcRegNo1, SrcRegNo2, SrcData1, SrcData2, DestRegNo_EX, DestRegNo_MEM, D
 begin
 
 
-if (SrcRegNo1 = DestRegNo_EX and DestWrEn_EX = '1') then
+if (SrcRegNo1 /= "000000" and SrcRegNo1 = DestRegNo_EX and DestWrEn_EX = '1') then
 	FwdData1 <= DestData_EX;
-elsif (SrcRegNo1 = DestRegNo_MEM and DestWrEn_MEM = '1') then
+elsif (SrcRegNo1 /= "000000" and SrcRegNo1 = DestRegNo_MEM and DestWrEn_MEM = '1') then
 	FwdData1 <= DestData_MEM;
 else
 	FwdData1 <= SrcData1;
 end if;
 
-if (SrcRegNo2 = DestRegNo_EX and DestWrEn_EX = '1') then
+if (SrcRegNo2 /= "000000" and SrcRegNo2 = DestRegNo_EX and DestWrEn_EX = '1') then
 	FwdData2 <= DestData_EX;
-elsif (SrcRegNo2 = DestRegNo_MEM and DestWrEn_MEM = '1') then
+elsif (SrcRegNo2 /= "000000" and SrcRegNo2 = DestRegNo_MEM and DestWrEn_MEM = '1') then
 	FwdData2 <= DestData_MEM;
 else
 	FwdData2 <= SrcData2;

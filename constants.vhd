@@ -21,6 +21,8 @@ PACKAGE constants IS
   constant opcode_JALR    : std_logic_vector(6 downto 0) := "1100111";
   constant opcode_JAL     : std_logic_vector(6 downto 0) := "1101111";
   constant opcode_SYSTEM  : std_logic_vector(6 downto 0) := "1110011";
+  constant opcode_ATOMIC  : std_logic_vector(6 downto 0) := "0101111";
+  
 
   constant funct_BEQ      : std_logic_vector(2 downto 0) := "000";
   constant funct_BNE      : std_logic_vector(2 downto 0) := "001";
