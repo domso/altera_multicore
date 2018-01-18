@@ -28,6 +28,7 @@ entity decode is
 		MemWrEn	  : out std_logic;
 		MemFunc	  : out std_logic_vector(3 downto 0);
 		MemLink    : out std_logic;
+		Fence      : out std_logic;
 		InterlockO : out std_logic
 	);
 end decode;
@@ -58,6 +59,7 @@ begin
 		MemWrEn		 <= '0';
 		MemFunc 		 <= "0000";
 		MemLink		 <= '0';
+		Fence			 <= '0';
 	else	
 		case Insn(6 downto 0) is
 		when opcode_OP => 
@@ -81,6 +83,7 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_OP_IMM => 
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -111,6 +114,7 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_LUI =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -132,6 +136,7 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_JAL =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -157,6 +162,7 @@ begin
 			MemWrEn		 <= '0';		
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_JALR =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -182,6 +188,7 @@ begin
 			MemWrEn		 <= '0';	
 			MemFunc 		 <= "0000";		
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_BRANCH =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -203,6 +210,7 @@ begin
 			MemWrEn		 <= '0';		
 			MemFunc 		 <= "0000";	
 			MemLink		 <= '0';	
+			Fence			 <= '0';
 		when opcode_AUIPC =>
 			Funct		 	 <= "000";
 			SrcRegNo1 	 <= "0" & "00000";
@@ -223,6 +231,7 @@ begin
 			MemWrEn		 <= '0';		
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_load =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -249,6 +258,7 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_store =>
 			Funct		 	 <= Insn(14 downto 12);
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -275,6 +285,7 @@ begin
 			MemWrEn		 <= '1';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		when opcode_ATOMIC =>
 			Funct		 	 <= "010"; --only word!
 			SrcRegNo1 	 <= "0" & Insn(19 downto 15);
@@ -345,6 +356,12 @@ begin
 					MemWrEn		 <= '0';
 					MemLink		 <= '0';
 			end case;
+			
+			if (Insn(26 downto 25) = "00") then
+				Fence			 <= '0';
+			else
+				Fence			 <= '1';
+			end if;
 		when opcode_SYSTEM => -- currently read only
 			Funct		 	 <= "000";
 			
@@ -384,6 +401,29 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
+		when opcode_MISC_MEM =>
+			DestWrEn	 	 <= '0'; 
+			Funct		 	 <= "000";
+			SrcRegNo1 	 <= "0" & "00000";
+			SrcRegNo2 	 <= "0" & "00000";
+			DestRegNo 	 <= "0" & "00000";
+			DestWrEn	 	 <= '0';
+			SelSrc2	 	 <= '0';	
+			Aux		 	 <= '0';
+			Imm		 	 <= x"00000000";
+			
+			Jump		 	 <= '0';
+			JumpRel	 	 <= '0';
+			JumpTarget	 <= x"00000000";
+			PCNextO 		 <= PCNextI;	
+			
+			InterlockO	 <= '0';
+			MemAccess	 <= '0';
+			MemWrEn		 <= '0';
+			MemFunc 		 <= "0000";
+			MemLink		 <= '0';
+			Fence			 <= '1';			
 		when others =>
 			DestWrEn	 	 <= '0'; 
 			Funct		 	 <= "000";
@@ -405,6 +445,7 @@ begin
 			MemWrEn		 <= '0';
 			MemFunc 		 <= "0000";
 			MemLink		 <= '0';
+			Fence			 <= '0';
 		end case;
 	end if;
 end process;

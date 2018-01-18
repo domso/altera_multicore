@@ -9,6 +9,8 @@ asm(
     ".global _start\n\t"
     "_start:\n\t"
 
+
+"lui x1, 0x80000\n\t"
 "csrr a0, 0xf14\n\t"
 
 "add a1, x0, 1024\n\t"
@@ -57,25 +59,28 @@ void sleep() {
 
 std::atomic<int> counter;
 
-//constexpr const seven_segment_display* outputDisplay = reinterpret_cast<const seven_segment_display*>(0xC0000000); 
+#define outputDisplay ((seven_segment_display*)0xC0000000)
 
 
 extern "C"
 int entry_cpp(const int coreID) {
+	int i = 5;
     counter.store(0);
-  
-    seven_segment_display* outputDisplay = reinterpret_cast<seven_segment_display*>(0xC0000000); 
 
+    i = counter.load();
+
+	counter.fetch_add(1);
+//i++;
     if (coreID == 1) {
-    	while(true) {
-	    counter.fetch_add(1);
-	    sleep();
-	}
+//    	while(true) {
+//	    counter.fetch_add(1);
+//	    sleep();
+//	}
     }
 
     if (coreID == 0) {
-	while (true) {
-		outputDisplay->set(counter.load());
+	while (true) {		
+		outputDisplay->set(i);		
 	}
     }
 }

@@ -19,9 +19,9 @@ entity ALUTest is
 		JumpRel 		: in std_logic;
 		JumpTargetI : in std_logic_vector(31 downto 0);
 		MemAccessI 	: in std_logic;
-		SrcData2 	: in std_logic_vector(31 downto 0);
 		Clear 		: in std_logic;
 		Stall 		: in std_logic;
+		SrcData2 	: in std_logic_vector(31 downto 0);
 
 		JumpTargetO : out std_logic_vector(31 downto 0);
 		X 				: out std_logic_vector(31 downto 0);
