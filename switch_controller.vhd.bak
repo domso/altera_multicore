@@ -1,0 +1,42 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity led_controller is
+	Port (	
+		V	  : in  std_logic_vector(31 downto 0);	
+		set  : in  std_logic;	
+		nRst : in  std_logic;
+		Clk  : in  std_logic;
+		
+		ledr : out std_logic_vector(17 downto 0);
+		ledg : out std_logic_vector(8 downto 0)
+	);	
+end led_controller;
+
+architecture Behavioral of led_controller is
+signal store_ledr : std_logic_vector(17 downto 0);
+signal store_ledg : std_logic_vector(8 downto 0);
+
+begin
+process(nRst, Clk)
+begin
+
+if (nRst = '0') then
+	store_ledr <= (others => '0');
+	store_ledg <= (others => '0');
+	
+	ledr <= (others => '0');
+	ledg <= (others => '0');
+elsif (rising_edge(Clk)) then
+	if (set = '1') then	
+		store_ledr <= V(17 downto 0);
+		store_ledg <= V(26 downto 17);
+	end if;
+	
+	ledr <= store_ledr;
+	ledg <= store_ledg;
+end if;
+end process;
+
+end Behavioral;

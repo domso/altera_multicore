@@ -7,9 +7,7 @@ entity BusReader is
 		busData        : in	std_logic_vector(31 downto 0);
 		busAddress     : in	std_logic_vector(31 downto 0);
 		busCtrl        : in	std_logic_vector(31 downto 0);
-		
-		sram				: in std_logic_vector(15 downto 0);
-		
+				
 		nRst        : in	std_logic;
 		Clk			: in	std_logic
 	);	

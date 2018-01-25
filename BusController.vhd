@@ -102,7 +102,7 @@ elsif rising_edge(Clk) then
 		when STATE_ACQUIRE =>	
 			if (store_link = '1' and store_wren = '1' and store_link_address /= store_address) then
 				aktuellerZustand <= STATE_READY;
-				dataO <= x"00000001";				
+				dataO <= x"FFFFFFFF";				
 				Stall <= '0';
 				
 				if (busAck = mhartid) then				
@@ -149,10 +149,9 @@ elsif rising_edge(Clk) then
 				end if;
 				
 				if (store_link = '1' and store_wren = '0') then
-					store_link_address <= store_address;
-				else						
-					store_link_address <= x"00000000";				
-				end if;
+					store_link_address <= store_address;		
+				end if;				
+				
 			else
 				dataO <= x"00000003";
 				Stall <= '1';

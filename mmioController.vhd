@@ -4,16 +4,17 @@ use ieee.numeric_std.all;
 
 entity mmioController is
 	Port (
-		data        : inout	std_logic_vector(31 downto 0);
-		address     : inout	std_logic_vector(31 downto 0);
-		ctrl	      : inout	std_logic_vector(31 downto 0);
+		busData        : inout	std_logic_vector(31 downto 0);
+		busAddress     : inout	std_logic_vector(31 downto 0);
+		busCtrl	      : inout	std_logic_vector(31 downto 0);
 		
+		dataI	 		: in std_logic_vector(31 downto 0);
 		busAck      : in	std_logic_vector(31 downto 0);
 		nRst        : in	std_logic;
 		Clk			: in	std_logic;
 		
 		dataO	 		: out std_logic_vector(31 downto 0);
-		wren			: out	std_logic
+		set			: out	std_logic_vector(3 downto 0)
 	);	
 end mmioController;
 
@@ -24,22 +25,51 @@ process(nRst, Clk)
 begin
 
 if nRst = '0' then
-	data	  <= (others => 'Z');
-	address <= (others => 'Z');
-	ctrl    <= (others => 'Z');
-	wren    <= '0';
+	busData	  <= (others => 'Z');
+	busAddress <= (others => 'Z');
+	busCtrl    <= (others => 'Z');
+	set        <= (others => '0');
+	dataO      <= (others => '0');
 elsif rising_edge(Clk) then
-	if busAck /= x"FFFFFFFF" and ctrl(31) = '0' and ctrl(0) = '1' and address(31 downto 30) = "11" then	
-		ctrl	<= x"00000000";
-		dataO	<= data;
-		wren  <= '1';
-	else
-		ctrl <= (others => 'Z');
-		wren <= '0';
-	end if;				
+	if busAck /= x"FFFFFFFF" and busCtrl(31) = '0' and busCtrl /= x"00000000" and busAddress(31 downto 30) = "11" then	
+		busCtrl	<= x"00000000";		
+		
+		if  (busCtrl(0) = '0') then
+			case busAddress(7 downto 0) is
+				when x"00" =>
+					set  <= "0000";
+					busData <= dataI;
+				when others   =>
+					set  <= "0000";
+					busData <= (others => 'Z');
+			end case;
 			
-	data	  <= (others => 'Z');
-	address <= (others => 'Z');
+			dataO <= (others => '0');
+		else
+			case busAddress(7 downto 0) is
+				when x"10" =>
+					set     <= "0001";
+				when x"20" =>
+					set     <= "0010";
+				when x"30" =>
+					set     <= "0100";
+				when x"40" =>
+					set     <= "1000";
+				when others   => 
+					set     <= "0000";
+			end case;
+			
+			busData <= (others => 'Z');
+			dataO   <= busData;
+		end if;	
+	else
+		busCtrl <= (others => 'Z');
+		busData <= (others => 'Z');
+		dataO <= (others => '0');
+		set  <= "0000";
+	end if;						
+	
+	busAddress <= (others => 'Z');
 end if;
 
 end process;

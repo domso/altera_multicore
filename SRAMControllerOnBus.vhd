@@ -62,7 +62,7 @@ elsif rising_edge(Clk) then
 	
 	case aktuellerZustand is	
 		when waitMemInstr =>		
-			if busAck /= x"FFFFFFFF" and ctrl(31) = '0' and ctrl(0) = '1' and address(31) = '1' then		
+			if busAck /= x"FFFFFFFF" and ctrl(31) = '0' and ctrl(0) = '1' and address(31 downto 30) = "10" then		
 				if (ctrl(8 downto 5) = "0000") then
 					input_data_storage := data;
 				else
@@ -137,7 +137,7 @@ elsif rising_edge(Clk) then
 				SRAM_Read_Enable_N	<= 'X';	
 				aktuellerZustand 		<= writeHighByte;
 				ctrl				 		<= x"FFFFFFFF";
-			elsif busAck /= x"FFFFFFFF" and ctrl(0) = '0' and ctrl /= x"00000000" and address(31) = '1' then
+			elsif busAck /= x"FFFFFFFF" and ctrl(0) = '0' and ctrl /= x"00000000" and address(31 downto 30) = "10"  then
 				SRAM_data				<= (others => 'Z');
 				SRAM_Read_Enable_N	<= '0';
 				SRAM_Write_Enable_N  <= '1';		

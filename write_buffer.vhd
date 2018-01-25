@@ -84,6 +84,8 @@ if (nRst = '0') then
 	linkO    <= '0';
 	byteEnaO <= (others => '0');
 	
+	resultDataO <= (others => '0');
+	
 	read_Func    := (others => '0');
 	read_data    := (others => '0');
 	read_address := (others => '0');
@@ -121,6 +123,7 @@ elsif rising_edge(Clk) then
 					store_read_byteEna <= (others => '0');					
 				else
 					StallO <= '0';
+					resultDataO <= store_result;
 				end if;	
 			elsif (wrenI = '0' and byteEnaI /= "0000" and addressI(31 downto 30) /= "00") then                                          -- read(-modify-write)
 				found_byte_ena  := "0000";
@@ -179,6 +182,7 @@ elsif rising_edge(Clk) then
 					store_read_link    <= '0';
 					store_read_byteEna <= (others => '0');	
 				else
+					resultDataO <= store_result;
 					StallO <= '0';
 				end if;
 			end if;
@@ -186,6 +190,7 @@ elsif rising_edge(Clk) then
 			if (current_slot = num_slots) then
 				StallO <= '1';
 			else
+				resultDataO <= store_result;
 				StallO <= '0';
 				inputState <= STATE_IN_READY;
 			end if;
@@ -194,6 +199,7 @@ elsif rising_edge(Clk) then
 			
 				if (store_read_byteEna = "0000") then			
 					inputState <= STATE_IN_READY;
+					resultDataO <= store_result;
 					StallO <= '0';					
 				else
 					read_Func    := store_read_Func;  
@@ -266,6 +272,7 @@ elsif rising_edge(Clk) then
 			
 			if (StallI = '0') then
 				outputState <= STATE_OUT_READY;
+				store_result <= resultDataI;
 				
 				if (current_slot /= 0) then
 					for i in 0 to num_slots - 2
