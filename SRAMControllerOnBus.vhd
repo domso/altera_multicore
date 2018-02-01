@@ -128,11 +128,11 @@ elsif rising_edge(Clk) then
 						SRAM_Write_Enable_N_store<= '1';
 				end case;				
 				
-				if (ctrl(8 downto 5) = "0001") then
-					SRAM_ALU_store       <= ALUIn_2;
-				else
-					SRAM_ALU_store       <= ALUIn_1;
-				end if;
+			--	if (ctrl(8 downto 5) = "0001") then
+				SRAM_ALU_store       <= ALUIn_2;
+			--	else
+				--	SRAM_ALU_store       <= ALUIn_1;
+				--end if;
 				
 				SRAM_Read_Enable_N	<= 'X';	
 				aktuellerZustand 		<= writeHighByte;

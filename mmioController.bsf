@@ -62,8 +62,8 @@ agreement for further details.
 	(port
 		(pt 232 96)
 		(output)
-		(text "set[3..0]" (rect 0 0 31 12)(font "Arial" ))
-		(text "set[3..0]" (rect 180 91 211 103)(font "Arial" ))
+		(text "set[4..0]" (rect 0 0 33 12)(font "Arial" ))
+		(text "set[4..0]" (rect 178 91 211 103)(font "Arial" ))
 		(line (pt 232 96)(pt 216 96)(line_width 3))
 	)
 	(port

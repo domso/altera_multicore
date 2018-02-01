@@ -12,12 +12,6 @@ asm(
 
 
     "lui x1, 0x80000\n\t"
-    //"lr.w.sc x2, (x1)\n\t"
-    //"sc.w.sc x3, a0, (x1)\n\t"
-
-    //"lw x4, 0(x1)\n\t"
-
-
 
 
     "add a1, x0, 1024\n\t"
@@ -37,7 +31,7 @@ asm(
 
 namespace system {
 	void wait() {
-		for (int i = 0; i < 100000; i++) {
+		for (volatile int i = 0; i < 100000; i++) {
 	
 		}
 	}
@@ -101,6 +95,29 @@ namespace board {
 		private:
 			volatile int32_t m_data;
 		};
+
+		class lcd_display {
+		public:
+			void print(const char* c) {
+				for (int i = 0; c[i] != 0; i++) {
+					m_data = (i << 8) + c[i];
+				}
+			}
+
+			void print(const char* c, const int n) {
+				for (int i = 0; i < n && i < 32; i++) {
+					m_data = (i << 8) + c[i];
+				}
+			}
+
+			void reset() {
+				for (int i = 0; i < 32; i++) {
+					m_data = ' ';
+				}
+			}
+		private:
+			volatile int32_t m_data;
+		};
 	}
 
 	namespace keys {
@@ -112,6 +129,10 @@ namespace board {
 		static driver::seven_segment_display* const port1 = (driver::seven_segment_display*)0xC0000020;
 	}
 
+	namespace lcd_display {
+		static driver::lcd_display* const display = (driver::lcd_display*)0xC0000050;
+	}
+
 	namespace leds {
 		static driver::leds<18>* const red  = (driver::leds<18>*)0xC0000030;
 		static driver::leds<9>* const green = (driver::leds<9>*)0xC0000040;
@@ -119,17 +140,20 @@ namespace board {
 }
 
 namespace global {
-	std::atomic<int> displayValue;
+	std::atomic<int> displayValueLeft;
+	std::atomic<int> displayValueRight;
 	util::barrier* barrier;
 	std::atomic<int> startBarrier;
 }
 
 void red_beam() {
     while (true) {
-        for (int i = 0; i < board::leds::red->size(); i++) {
-	    board::leds::red->set(1U << i);
+	global::barrier->wait();
+        for (int i = 0; i <= board::leds::red->size(); i++) {
+	    board::leds::red->set(15U << i);
 	    system::wait();
 	}
+	global::barrier->wait();
     }
 }
 
@@ -139,25 +163,45 @@ void green_beam() {
 	    board::leds::green->set((1U << i) - 1);
 	    system::wait();
 	}
+
+	global::barrier->wait();
+	global::barrier->wait();
     }
 }
 
 void producer() {
     while (true) {
-	    global::displayValue.store(board::keys::switches->read());
+	global::displayValueLeft.store(board::keys::switches->read());
     }
 }
 
 void consumer() {
     while (true) {
-	int current = global::displayValue.load();
-	board::hex_display::port0->set(current);
-	board::hex_display::port1->set(current / 10000);
+	int left = global::displayValueLeft.load();
+	int right = global::displayValueRight.load();
+	board::hex_display::port0->set(right);
+	board::hex_display::port1->set(left);
+    }
+}
+
+void counter() {
+    while (true) {
+	int left = global::displayValueLeft.load();
+	int right = global::displayValueRight.load();
+
+	if (right < left) {
+		global::displayValueRight.compare_exchange_strong(right, right + 1, std::memory_order_relaxed);
+	}
+
+	if (global::displayValueLeft.load(std::memory_order_relaxed) < global::displayValueRight.load(std::memory_order_relaxed)) {
+		global::displayValueRight.store(0, std::memory_order_relaxed);
+	}	
+
+	system::wait();
     }
 }
 
 int main() {
-	global::barrier->wait();
 	switch (system::coreID()) {
 		case 0 : {
 				producer();			
@@ -175,6 +219,10 @@ int main() {
 				green_beam();		
 				 break;
 			 }
+		default: {
+				counter();
+				break;
+			 }
 
 	}
 }
@@ -182,13 +230,22 @@ int main() {
 extern "C"
 int entry_cpp(const int coreID) {
     // All cores are synchronized at this moment!
-	global::startBarrier.store(0);
+    global::startBarrier.store(0);
     
     if (coreID == 0) {
-  	util::barrier barrierOnStack(4);
+	   
+  	util::barrier barrierOnStack(2);
 	global::barrier = &barrierOnStack;
 
+	global::displayValueLeft.store(0);
+	global::displayValueRight.store(0);
+
 	global::startBarrier.fetch_add(1);
+	
+	const char* test = "Hallo Welt!";
+
+	board::lcd_display::display->print(test);
+	
 	main();
     }
 

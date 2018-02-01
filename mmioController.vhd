@@ -14,7 +14,7 @@ entity mmioController is
 		Clk			: in	std_logic;
 		
 		dataO	 		: out std_logic_vector(31 downto 0);
-		set			: out	std_logic_vector(3 downto 0)
+		set			: out	std_logic_vector(4 downto 0)
 	);	
 end mmioController;
 
@@ -37,10 +37,10 @@ elsif rising_edge(Clk) then
 		if  (busCtrl(0) = '0') then
 			case busAddress(7 downto 0) is
 				when x"00" =>
-					set  <= "0000";
+					set  <= "00000";
 					busData <= dataI;
 				when others   =>
-					set  <= "0000";
+					set  <= "00000";
 					busData <= (others => 'Z');
 			end case;
 			
@@ -48,15 +48,17 @@ elsif rising_edge(Clk) then
 		else
 			case busAddress(7 downto 0) is
 				when x"10" =>
-					set     <= "0001";
+					set     <= "00001";
 				when x"20" =>
-					set     <= "0010";
+					set     <= "00010";
 				when x"30" =>
-					set     <= "0100";
+					set     <= "00100";
 				when x"40" =>
-					set     <= "1000";
+					set     <= "01000";
+				when x"50" =>
+					set     <= "10000";
 				when others   => 
-					set     <= "0000";
+					set     <= "00000";
 			end case;
 			
 			busData <= (others => 'Z');
@@ -66,7 +68,7 @@ elsif rising_edge(Clk) then
 		busCtrl <= (others => 'Z');
 		busData <= (others => 'Z');
 		dataO <= (others => '0');
-		set  <= "0000";
+		set  <= "00000";
 	end if;						
 	
 	busAddress <= (others => 'Z');

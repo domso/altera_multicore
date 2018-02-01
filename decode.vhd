@@ -309,59 +309,82 @@ begin
 			case Insn(31 downto 27) is
 				when "00010"  => --LR
 					MemFunc <= "0000";
-					MemWrEn		 <= '0';
-					MemLink		 <= '1';				
+					MemWrEn <= '0';
+					MemLink <= '1';	
+					Fence   <= Insn(25);				
 				when "00011"  => --SC
 					MemFunc <= "0000";
-					MemWrEn		 <= '1';	
-					MemLink		 <= '1';		
+					MemWrEn <= '1';	
+					MemLink <= '1';	
+					Fence   <= Insn(26);	
 				when "00001"  => --AMOSWAP
 					MemFunc <= "0001";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "00000"  => --AMOADD
 					MemFunc <= "0010";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "00100"  => --AMOXOR
 					MemFunc <= "0011";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "01100"  => --AMOAND
 					MemFunc <= "0100";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "01000"  => --AMOOR
 					MemFunc <= "0101";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "10000"  => --AMOMIN
 					MemFunc <= "0110";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "10100"  => --AMOMAX
 					MemFunc <= "0111";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "11000"  => --AMOMINU
 					MemFunc <= "1000";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when "11100"  => --AMOMAXU
 					MemFunc <= "1001";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence   <= Insn(25);
 				when others =>
 					MemFunc <= "0000";
-					MemWrEn		 <= '0';
-					MemLink		 <= '0';
+					MemWrEn <= '0';
+					MemLink <= '0';
+					Fence	  <= '0';
 			end case;
 			
-			if (Insn(26 downto 25) = "00") then
-				Fence			 <= '0';
+			-- load: Fence <= Insn(25)
+			-- store: Fence <= Insn(26)
+			
+			-- RMW: Fence <= Insn(25)
+						
+			-- rl & ac
+			-- rl & load
+			-- ac & write
+			-- ac
+			
+			if ( Insn(26 downto 25) = "00") then
+				--Fence <= '0';
 			else
-				Fence			 <= '1';
+				--Fence <= '1';
 			end if;
+			
 		when opcode_SYSTEM => -- currently read only
 			Funct		 	 <= "000";
 			

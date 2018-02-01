@@ -4,30 +4,26 @@ use ieee.numeric_std.all;
 
 entity write_buffer is
 	Port (		
-		nRst   					: in std_logic;
-		Clk   					: in std_logic;	
-
-		
-		StallI					: in	std_logic;
-		FenceI					: in	std_logic;
-		
-		FuncI     	         : in std_logic_vector(3 downto 0);	
-		dataI        			: in std_logic_vector(31 downto 0);
-		addressI     			: in std_logic_vector(31 downto 0);
-		wrenI        			: in std_logic;
-		linkI        			: in std_logic;
-		byteEnaI 	         : in std_logic_vector(3 downto 0);
-		resultDataI   			: in std_logic_vector(31 downto 0);
+		nRst   		: in std_logic;
+		Clk   		: in std_logic;			
+		StallI		: in	std_logic;
+		FenceI		: in	std_logic;		
+		FuncI     	: in std_logic_vector(3 downto 0);	
+		dataI       : in std_logic_vector(31 downto 0);
+		addressI    : in std_logic_vector(31 downto 0);
+		wrenI       : in std_logic;
+		linkI       : in std_logic;
+		byteEnaI 	: in std_logic_vector(3 downto 0);
+		resultDataI : in std_logic_vector(31 downto 0);
 	
-		StallO					: out	std_logic;
-	
-		FuncO     	         : out std_logic_vector(3 downto 0);	
-		dataO        			: out std_logic_vector(31 downto 0);
-		addressO     			: out std_logic_vector(31 downto 0);
-		wrenO        			: out std_logic;
-		linkO        			: out std_logic;
-		byteEnaO 	         : out std_logic_vector(3 downto 0);
-		resultDataO  			: out std_logic_vector(31 downto 0)
+		StallO		: out	std_logic;	
+		FuncO     	: out std_logic_vector(3 downto 0);	
+		dataO       : out std_logic_vector(31 downto 0);
+		addressO    : out std_logic_vector(31 downto 0);
+		wrenO       : out std_logic;
+		linkO       : out std_logic;
+		byteEnaO 	: out std_logic_vector(3 downto 0);
+		resultDataO : out std_logic_vector(31 downto 0)
 	);
 end write_buffer;
 
@@ -42,28 +38,27 @@ architecture Behavioral of write_buffer is
 	
 	constant num_slots : integer := 4;	
 	
-	signal store_read_Func     	         : std_logic_vector(3 downto 0);	
-	signal store_read_data        			: std_logic_vector(31 downto 0);
-	signal store_read_address     			: std_logic_vector(31 downto 0);
-	signal store_read_wren       			: std_logic;
-	signal store_read_link       			: std_logic;
-	signal store_read_byteEna 	         : std_logic_vector(3 downto 0);	
-	
-	signal store_result      			: std_logic_vector(31 downto 0);
+	signal store_read_Func    : std_logic_vector(3 downto 0);	
+	signal store_read_data    : std_logic_vector(31 downto 0);
+	signal store_read_address : std_logic_vector(31 downto 0);
+	signal store_read_wren    : std_logic;
+	signal store_read_link    : std_logic;
+	signal store_read_byteEna : std_logic_vector(3 downto 0);		
+	signal store_result       : std_logic_vector(31 downto 0);
 begin
 
 process(nRst, Clk)
-	variable found_byte_ena  : std_logic_vector(3 downto 0) := "0000";
-	variable found_data : std_logic_vector(31 downto 0) := x"00000000";
-	variable slots : vector74((num_slots - 1) downto 0);	
-	variable current_slot : integer := 0;
+	variable found_byte_ena : std_logic_vector(3 downto 0) := "0000";
+	variable found_data     : std_logic_vector(31 downto 0) := x"00000000";
+	variable slots          : vector74((num_slots - 1) downto 0);	
+	variable current_slot   : integer := 0;
 	
-	variable read_Func     	         : std_logic_vector(3 downto 0);	
-	variable read_data        			: std_logic_vector(31 downto 0);
-	variable read_address     			: std_logic_vector(31 downto 0);
-	variable read_wren       			: std_logic;
-	variable read_link       			: std_logic;
-	variable read_byteEna 	         : std_logic_vector(3 downto 0);
+	variable read_Func    : std_logic_vector(3 downto 0);	
+	variable read_data  	 : std_logic_vector(31 downto 0);
+	variable read_address : std_logic_vector(31 downto 0);
+	variable read_wren    : std_logic;
+	variable read_link    : std_logic;
+	variable read_byteEna : std_logic_vector(3 downto 0);
 begin
 
 if (nRst = '0') then

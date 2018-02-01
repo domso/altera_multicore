@@ -12,7 +12,7 @@ void barrier::wait() {
 	int ticket = m_head;
 
 	// increase current number of threads waiting on the barrier
-	int current = m_counter++;
+	int current = m_counter.fetch_add(1);
 
 	// if all threads reached the wait() call, proceed with the call
 	if (current + 1 == m_size) {

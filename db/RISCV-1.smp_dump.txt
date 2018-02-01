@@ -1,4 +1,11 @@
 
+State Machine - |multicore|lcd_example:inst|lcd_controller:dut|state
+Name state.send state.ready state.initialize state.power_up 
+state.power_up 0 0 0 0 
+state.initialize 0 0 1 1 
+state.ready 0 1 0 1 
+state.send 1 0 0 1 
+
 State Machine - |multicore|cluster:clusterInstance|node:\nodeCluster:3:lastNode:n2|BusController:busControllerInstance|aktuellerZustand
 Name aktuellerZustand.STATE_SEND aktuellerZustand.STATE_ACQUIRE aktuellerZustand.STATE_FORWARD aktuellerZustand.STATE_READY 
 aktuellerZustand.STATE_READY 0 0 0 0 

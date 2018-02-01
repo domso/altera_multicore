@@ -5,14 +5,14 @@ use work.constants.all;
 
 entity cluster is
 	Port (		
-		nRst   					: in std_logic;
-		Clk   					: in std_logic;
+		nRst : in std_logic;
+		Clk  : in std_logic;
 		
-		busData		: inout std_logic_vector(31 downto 0);
-		busAddr		: inout std_logic_vector(31 downto 0);
-		busCtrl		: inout std_logic_vector(31 downto 0);
+		busData : inout std_logic_vector(31 downto 0);
+		busAddr : inout std_logic_vector(31 downto 0);
+		busCtrl : inout std_logic_vector(31 downto 0);
 		
-		busAck      : out std_logic_vector(31 downto 0)
+		busAck : out std_logic_vector(31 downto 0)
 	);
 end cluster;
 
@@ -28,16 +28,16 @@ architecture Behavioral of cluster is
 component node	
 	generic (mhartid : std_logic_vector(31 downto 0));
 	Port (		
-		nRst   					: in std_logic;
-		Clk   					: in std_logic;
+		nRst : in std_logic;
+		Clk  : in std_logic;
 		
-		busData		: inout std_logic_vector(31 downto 0);
-		busAddr		: inout std_logic_vector(31 downto 0);
-		busCtrl		: inout std_logic_vector(31 downto 0);
+		busData : inout std_logic_vector(31 downto 0);
+		busAddr : inout std_logic_vector(31 downto 0);
+		busCtrl : inout std_logic_vector(31 downto 0);
 
-		busAck		: in std_logic_vector(31 downto 0);
-		busReq		: out std_logic_vector(31 downto 0);
-		busForward	: in std_logic_vector(31 downto 0)
+		busAck	  : in std_logic_vector(31 downto 0);
+		busReq	  : out std_logic_vector(31 downto 0);
+		busForward : in std_logic_vector(31 downto 0)
 
 	);
 end component;
