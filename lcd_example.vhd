@@ -65,7 +65,7 @@ BEGIN
              busy => lcd_busy, rw => rw, rs => rs, e => e, lcd_data => lcd_data);
   
   PROCESS(clk)
-    VARIABLE char  :  INTEGER RANGE 0 TO 32 := 0;
+    VARIABLE char  :  INTEGER := 0;
 	 
 	 TYPE Tdata IS array (0 to 31) of std_logic_vector(7 downto 0);
 	 variable stored_data : Tdata;
@@ -82,15 +82,20 @@ BEGIN
 	 
       IF(lcd_busy = '0' AND lcd_enable = '0') THEN
         lcd_enable <= '1';
-        IF(char < 32) THEN
-          char := char + 1;
-        END IF;
 
-		 
-		  if (char = 32) then
+        char := char + 1;
+
+		  if (char = 1) then
+				lcd_bus <= "0010000000";
+		  elsif (char < 18) then
+				lcd_bus <= "10" & stored_data(char - 2);				
+		  elsif (char = 18) then
+				lcd_bus <= "0011000000";
+		  elsif (char < 35) then
+				lcd_bus <= "10" & stored_data(char - 3);				
+		  else
 				lcd_enable <= '0';
-			else
-				lcd_bus <= "10" & stored_data(char - 1);
+				char := 0;
 		  end if;
 		  
 --        CASE char IS

@@ -99,14 +99,32 @@ namespace board {
 		class lcd_display {
 		public:
 			void print(const char* c) {
-				for (int i = 0; c[i] != 0; i++) {
-					m_data = (i << 8) + c[i];
+				int position = 0;
+				for (int i = 0; c[i] != 0 && position < 32; i++) {
+					if (c[i] == '\n') {
+						while ((position & 15) != 0) {							
+							m_data = (position << 8) + ' ';
+							position++;
+						}
+					} else {
+						m_data = (position << 8) + c[i];
+						position++;
+					}
 				}
 			}
 
 			void print(const char* c, const int n) {
-				for (int i = 0; i < n && i < 32; i++) {
-					m_data = (i << 8) + c[i];
+				int position = 0;
+				for (int i = 0; c[i] != 0 && i < n && position < 32; i++) {
+					if (c[i] == '\n') {
+						while ((position & 15) != 0) {							
+							m_data = (position << 8) + ' ';
+							position++;
+						}
+					} else {
+						m_data = (position << 8) + c[i];
+						position++;
+					}
 				}
 			}
 
@@ -218,7 +236,7 @@ int main() {
 		case 3 : {
 				green_beam();		
 				 break;
-			 }
+			 } 
 		default: {
 				counter();
 				break;
@@ -242,7 +260,7 @@ int entry_cpp(const int coreID) {
 
 	global::startBarrier.fetch_add(1);
 	
-	const char* test = "Hallo Welt!";
+	const char* test = "Hallo Welt!\n~*~*~*~*~*~";
 
 	board::lcd_display::display->print(test);
 	
