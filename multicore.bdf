@@ -674,49 +674,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 1544 -32 1880 96)
-	(text "debug" (rect 5 0 58 14)(font "Liberation Sans" (font_size 8)))
-	(text "debugInstance" (rect 8 100 115 111)(font "Liberation Sans" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "data[31..0]" (rect 0 0 116 14)(font "Liberation Sans" (font_size 8)))
-		(text "data[31..0]" (rect 21 27 137 41)(font "Liberation Sans" (font_size 8)))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "Address[31..0]" (rect 0 0 148 14)(font "Liberation Sans" (font_size 8)))
-		(text "Address[31..0]" (rect 21 43 169 57)(font "Liberation Sans" (font_size 8)))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "Ctrl[31..0]" (rect 0 0 116 14)(font "Liberation Sans" (font_size 8)))
-		(text "Ctrl[31..0]" (rect 21 59 137 73)(font "Liberation Sans" (font_size 8)))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "nRst" (rect 0 0 42 14)(font "Liberation Sans" (font_size 8)))
-		(text "nRst" (rect 21 75 63 89)(font "Liberation Sans" (font_size 8)))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "Clk" (rect 0 0 31 14)(font "Liberation Sans" (font_size 8)))
-		(text "Clk" (rect 21 91 52 105)(font "Liberation Sans" (font_size 8)))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(drawing
-		(rectangle (rect 16 16 320 112))
-	)
-)
-(symbol
 	(rect 1552 288 1728 400)
 	(text "SevenSeg" (rect 5 0 71 11)(font "Arial" ))
 	(text "SevenSegInstance0" (rect 8 96 148 107)(font "Arial" ))
@@ -1113,7 +1070,7 @@ agreement for further details.
 		(pt 168 32)
 		(output)
 		(text "sw[31..0]" (rect 0 0 74 11)(font "Arial" ))
-		(text "sw[31..0]" (rect 85 27 147 38)(font "Arial" ))
+		(text "sw[31..0]" (rect 85 27 159 38)(font "Arial" ))
 		(line (pt 168 32)(pt 152 32)(line_width 3))
 	)
 	(drawing
@@ -1557,10 +1514,6 @@ agreement for further details.
 	(pt 1352 592)
 )
 (connector
-	(pt 608 208)
-	(pt 1336 208)
-)
-(connector
 	(pt 624 224)
 	(pt 1352 224)
 )
@@ -1577,71 +1530,6 @@ agreement for further details.
 (connector
 	(pt 1128 504)
 	(pt 1128 648)
-	(bus)
-)
-(connector
-	(pt 1096 0)
-	(pt 1544 0)
-	(bus)
-)
-(connector
-	(pt 1112 16)
-	(pt 1544 16)
-	(bus)
-)
-(connector
-	(pt 1128 32)
-	(pt 1544 32)
-	(bus)
-)
-(connector
-	(pt 1336 48)
-	(pt 1544 48)
-)
-(connector
-	(pt 1336 48)
-	(pt 1336 208)
-)
-(connector
-	(pt 1336 208)
-	(pt 1336 352)
-)
-(connector
-	(pt 1352 64)
-	(pt 1352 224)
-)
-(connector
-	(pt 1352 224)
-	(pt 1352 368)
-)
-(connector
-	(pt 1096 0)
-	(pt 1096 320)
-	(bus)
-)
-(connector
-	(pt 1096 320)
-	(pt 1096 472)
-	(bus)
-)
-(connector
-	(pt 1112 16)
-	(pt 1112 336)
-	(bus)
-)
-(connector
-	(pt 1112 336)
-	(pt 1112 488)
-	(bus)
-)
-(connector
-	(pt 1128 32)
-	(pt 1128 352)
-	(bus)
-)
-(connector
-	(pt 1128 352)
-	(pt 1128 504)
 	(bus)
 )
 (connector
@@ -1662,10 +1550,6 @@ agreement for further details.
 	(pt 1304 320)
 	(pt 1552 320)
 	(bus)
-)
-(connector
-	(pt 1352 64)
-	(pt 1544 64)
 )
 (connector
 	(pt 640 272)
@@ -1776,12 +1660,36 @@ agreement for further details.
 	(pt 1352 824)
 	(pt 1352 936)
 )
+(connector
+	(pt 1352 224)
+	(pt 1352 368)
+)
+(connector
+	(pt 1096 320)
+	(pt 1096 472)
+	(bus)
+)
+(connector
+	(pt 1112 336)
+	(pt 1112 488)
+	(bus)
+)
+(connector
+	(pt 1128 352)
+	(pt 1128 504)
+	(bus)
+)
+(connector
+	(pt 608 208)
+	(pt 1336 208)
+)
+(connector
+	(pt 1336 208)
+	(pt 1336 352)
+)
 (junction (pt 1128 504))
 (junction (pt 1112 488))
 (junction (pt 1096 472))
-(junction (pt 1096 320))
-(junction (pt 1112 336))
-(junction (pt 1128 352))
 (junction (pt 608 472))
 (junction (pt 624 488))
 (junction (pt 640 568))
@@ -1801,8 +1709,6 @@ agreement for further details.
 (junction (pt 1336 688))
 (junction (pt 1304 544))
 (junction (pt 1320 560))
-(junction (pt 1336 208))
-(junction (pt 1352 224))
 (junction (pt 1304 656))
 (junction (pt 1320 672))
 (junction (pt 1336 808))

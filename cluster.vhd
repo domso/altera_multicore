@@ -21,7 +21,7 @@ architecture Behavioral of cluster is
 	signal signal_busAck : std_logic_vector(31 downto 0);
 
 	
-	constant num_core : integer := 4;	
+	constant num_core : integer := 16;	
 	signal signal_busReq : vector32((num_core - 1) downto 0);	
 	
 	

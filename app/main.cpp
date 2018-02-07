@@ -260,10 +260,10 @@ int entry_cpp(const int coreID) {
 
 	global::startBarrier.fetch_add(1);
 	
-	const char* test = "Hallo Welt!\n~*~*~*~*~*~";
+	const char* test = "Hardware-Entwurf Dominik Walter";
 
 	board::lcd_display::display->print(test);
-	
+
 	main();
     }
 

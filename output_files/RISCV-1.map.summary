@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Mon Feb  5 17:43:59 2018
+Analysis & Synthesis Status : Successful - Wed Feb  7 16:04:46 2018
 Quartus Prime Version : 16.0.2 Build 222 07/20/2016 SJ Standard Edition
 Revision Name : RISCV-1
 Top-level Entity Name : multicore
 Family : Cyclone IV E
-Total logic elements : 34,206
-    Total combinational functions : 24,516
-    Dedicated logic registers : 16,056
-Total registers : 16056
+Total logic elements : 94,603
+    Total combinational functions : 71,767
+    Dedicated logic registers : 39,677
+Total registers : 39677
 Total pins : 156
 Total virtual pins : 0
-Total memory bits : 1,462,272
+Total memory bits : 1,822,720
 Embedded Multiplier 9-bit elements : 0
 Total PLLs : 0
